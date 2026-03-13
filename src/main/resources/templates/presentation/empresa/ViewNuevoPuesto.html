@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" type="text/css">
+</head>
+<body>
+
+<header class="navbar">
+
+    <div class="logo">
+        <img src="/images/logo.png" alt="logo">
+        <span>BolsaEmpleo</span>
+
+        <nav>
+            <a href="/">Buscar puestos</a>
+            <a href="/">Registro Empresa</a>
+            <a href="/">Registro Oferente</a>
+        </nav>
+
+    </div>
+
+
+    <div class="login">
+        <a href="/">Login</a>
+    </div>
+
+</header>
+
+<div class="content">
+
+    <h1>Crear Puesto</h1>
+
+    <form method="POST" name="puesto" th:action="@{/presentation/empresa/create}" th:object="${puesto}">
+
+        <label class="label">ID</label>
+        <input type="text" th:field="*{id}" >
+
+
+        <label>Descripcion</label>
+        <input type="text" th:field="*{descripcion}">
+
+        <label>Nombre puesto</label>
+        <input type="text" th:field="*{nombrePuesto}">
+
+        <label>Salario</label>
+        <input type="text" th:field="*{salario}">
+
+        <label>Requisito</label>
+        <input type="text" th:field="*{requisitos}">
+
+        <label>Empresa</label>
+        <input type="text" th:field="*{empresa}">
+
+
+
+
+        <br><br>
+
+        <button type="submit">
+            Guardar
+        </button>
+
+    </form>
+
+</div>
+
+
+
+<footer>
+
+    <div>
+        <strong>Bolsa de Empleo</strong><br>
+        Total Soft Inc.
+    </div>
+
+    <div>
+        Contacto: info@bolsaempleo.local<br>
+        Créditos: Equipo de desarrollo
+    </div>
+
+</footer>
+
+</body>
+</html>
