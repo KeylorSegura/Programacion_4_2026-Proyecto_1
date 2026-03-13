@@ -32,7 +32,7 @@
   <div class="form-container">
     <h2>Registro de Empresa</h2>
 
-    <form th:object="${empresa}" action="/empresa/crearEmpresa" method="POST">
+    <form method="POST" th:object="${empresa}" action="/empresa/crearEmpresa" >
 
       <label>ID de la empresa</label>
       <input type="text" th:field="*{id}" required>
@@ -59,4 +59,17 @@
 </main>
 
 </body>
+
+<footer>
+
+  <div>
+    <strong>Bolsa de Empleo</strong><br>
+    Total Soft Inc.
+  </div>
+
+  <div>
+    Contacto: info@bolsaempleo.local<br>
+    Créditos: Equipo de desarrollo
+  </div>
+</footer>
 </html>

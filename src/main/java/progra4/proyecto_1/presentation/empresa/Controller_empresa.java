@@ -26,7 +26,6 @@ public class Controller_empresa {
         return "redirect:/presentation/publico/principal";
     }
 
-
     @GetMapping("/show")
     public String show(Model model) {
 
@@ -35,11 +34,9 @@ public class Controller_empresa {
         return "presentation/empresa/ViewNuevoPuesto";
     }
 
-    @PostMapping("/create")
+    @PostMapping("/crearPuesto")
     public String create(@ModelAttribute Puesto puesto) {
-
         service.agregarPuesto(puesto);
-
         return "redirect:/presentation/publico/principal";
     }
 

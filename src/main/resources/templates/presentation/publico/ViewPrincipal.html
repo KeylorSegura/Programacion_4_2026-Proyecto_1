@@ -43,7 +43,7 @@
 
         <h3 th:text="${p.empresa}"></h3>
 
-        <p th:text="${p.nombrePuesto}"></p>
+        <p th:text="${p.nombre}"></p>
 
         <p class="salario"
            th:text="'₡ ' + ${#numbers.formatDecimal(p.salario,1,'POINT',2,'COMMA')}">
@@ -54,7 +54,7 @@
         </button>
 
         <div class="detalle">
-          <strong th:text="${p.nombrePuesto}"></strong>
+          <strong th:text="${p.nombre}"></strong>
 
           <ul>
             <li th:text="${p.requisitos}">

@@ -13,13 +13,12 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Puesto {
-
     @Id
     private String id;
-
-    private String empresa;
+    private String nombre;
     private String descripcion;
-    private String nombrePuesto;
+    private String empresa;
     private int salario;
     private String requisitos;
+    private String tipoPublicacion;
 }

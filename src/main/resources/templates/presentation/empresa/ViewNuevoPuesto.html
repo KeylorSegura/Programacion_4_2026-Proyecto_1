@@ -32,17 +32,16 @@
 
     <h1>Crear Puesto</h1>
 
-    <form method="POST" name="puesto" th:action="@{/presentation/empresa/create}" th:object="${puesto}">
+    <form method="POST" name="puesto" th:action="@{/presentation/empresa/crearPuesto}" th:object="${puesto}">
 
         <label class="label">ID</label>
         <input type="text" th:field="*{id}" >
-
 
         <label>Descripcion</label>
         <input type="text" th:field="*{descripcion}">
 
         <label>Nombre puesto</label>
-        <input type="text" th:field="*{nombrePuesto}">
+        <input type="text" th:field="*{nombre}">
 
         <label>Salario</label>
         <input type="text" th:field="*{salario}">
@@ -53,20 +52,12 @@
         <label>Empresa</label>
         <input type="text" th:field="*{empresa}">
 
-
-
-
         <br><br>
 
-        <button type="submit">
-            Guardar
-        </button>
-
+        <button type="submit"> Guardar Puesto</button>
     </form>
 
 </div>
-
-
 
 <footer>
 
@@ -79,7 +70,6 @@
         Contacto: info@bolsaempleo.local<br>
         Créditos: Equipo de desarrollo
     </div>
-
 </footer>
 
 </body>
