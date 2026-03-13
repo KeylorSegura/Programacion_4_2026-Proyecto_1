@@ -1,6 +1,7 @@
 package progra4.proyecto_1.logic;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import progra4.proyecto_1.data.EmpresaRepository;
 import progra4.proyecto_1.data.PuestoRepository;
 
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.List;
 public class Service {
     @Autowired
     private PuestoRepository puestos;
+    private EmpresaRepository empresas;
 
     public List<Puesto> findAll(){
         return puestos.findAll();
@@ -28,5 +30,12 @@ public class Service {
 
     public void eliminarTodosPuestos(){
         puestos.deleteAll();
+    }
+
+    public void agregarEmpresa(Empresa empresa) {
+        if(empresas.existsById(empresa.getId())){
+            throw new IllegalArgumentException("Empresa ya existe");
+        }
+        empresas.save(empresa);
     }
 }

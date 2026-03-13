@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registrar Empresa</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" type="text/css">
+</head>
+
+<body>
+<header class="navbar">
+
+  <div class="logo">
+    <img src="/images/logo.png" alt="logo">
+    <span>BolsaEmpleo</span>
+
+    <nav>
+      <a href="/">Buscar puestos</a>
+      <a href="/presentation/empresa/registrar">Registro Empresa</a>
+      <a href="/">Registro Oferente</a>
+    </nav>
+
+  </div>
+
+
+  <div class="login">
+    <a href="/">Login</a>
+  </div>
+
+</header>
+
+<main>
+  <div class="form-container">
+    <h2>Registro de Empresa</h2>
+
+    <form action="/empresa/registrar" method="POST">
+
+      <label for="nombre">Nombre de la empresa</label>
+      <input type="text" id="nombre" name="nombre" required>
+
+      <label for="localizacion">Localización</label>
+      <input type="text" id="localizacion" name="localizacion" required>
+
+      <label for="correo">Correo electrónico</label>
+      <input type="email" id="correo" name="correo" required>
+
+      <label for="telefono">Teléfono</label>
+      <input type="tel" id="telefono" name="telefono" required>
+
+      <label for="descripcion">Descripción</label>
+      <textarea id="descripcion" name="descripcion" rows="4" required></textarea>
+
+      <button type="submit">Enviar solicitud</button>
+
+    </form>
+  </div>
+</main>
+
+</body>
+</html>
