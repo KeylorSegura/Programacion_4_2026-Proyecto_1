@@ -28,7 +28,6 @@ public class Controller_empresa {
 
     @GetMapping("/show")
     public String show(Model model) {
-
         model.addAttribute("puesto", new Puesto());
         service.eliminarTodosPuestos();
         return "presentation/empresa/ViewNuevoPuesto";

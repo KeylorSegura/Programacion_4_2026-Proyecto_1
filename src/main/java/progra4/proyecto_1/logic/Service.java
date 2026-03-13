@@ -3,6 +3,7 @@ package progra4.proyecto_1.logic;
 import org.springframework.beans.factory.annotation.Autowired;
 import progra4.proyecto_1.data.EmpresaRepository;
 import progra4.proyecto_1.data.PuestoRepository;
+import progra4.proyecto_1.data.UsuarioRepository;
 
 import java.util.List;
 
@@ -11,6 +12,7 @@ public class Service {
     @Autowired
     private PuestoRepository puestos;
     private EmpresaRepository empresas;
+    private UsuarioRepository usuarios;
 
     public List<Puesto> findAll(){
         return puestos.findAll();
@@ -37,5 +39,19 @@ public class Service {
             throw new IllegalArgumentException("Empresa ya existe");
         }
         empresas.save(empresa);
+    }
+
+    public boolean verificarUsuario(Usuario usuario) {
+        if(!usuarios.existsById(usuario.getIdetificacion())){
+            throw new IllegalArgumentException("Usuario no existe");
+        }
+        return true;
+    }
+
+    public void crearUsuario(Usuario usuario) {
+        if(usuarios.existsById(usuario.getIdetificacion())){
+            throw new IllegalArgumentException("Usuario existe");
+        }
+        usuarios.save(usuario);
     }
 }
