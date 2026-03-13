@@ -32,24 +32,27 @@
   <div class="form-container">
     <h2>Registro de Empresa</h2>
 
-    <form action="/empresa/registrar" method="POST">
+    <form th:object="${empresa}" action="/empresa/crearEmpresa" method="POST">
 
-      <label for="nombre">Nombre de la empresa</label>
-      <input type="text" id="nombre" name="nombre" required>
+      <label>ID de la empresa</label>
+      <input type="text" th:field="*{id}" required>
 
-      <label for="localizacion">Localización</label>
-      <input type="text" id="localizacion" name="localizacion" required>
+      <label>Nombre de la empresa</label>
+      <input type="text" th:field="*{nombre}" required>
 
-      <label for="correo">Correo electrónico</label>
-      <input type="email" id="correo" name="correo" required>
+      <label>Localización</label>
+      <input ttype="text" th:field="*{localizacion}"  required>
 
-      <label for="telefono">Teléfono</label>
-      <input type="tel" id="telefono" name="telefono" required>
+      <label>Correo electrónico</label>
+      <input type="text" th:field="*{correoElectronico}"  required>
 
-      <label for="descripcion">Descripción</label>
-      <textarea id="descripcion" name="descripcion" rows="4" required></textarea>
+      <label>Teléfono</label>
+      <input type="text" th:field="*{telefono}"  required>
 
-      <button type="submit">Enviar solicitud</button>
+      <label>Descripción</label>
+      <textarea type="text" th:field="*{descripcion}" required></textarea>
+
+      <button type="submit">Guardar Empresa</button>
 
     </form>
   </div>
