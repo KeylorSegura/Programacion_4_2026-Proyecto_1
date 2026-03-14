@@ -1,20 +1,29 @@
 package progra4.proyecto_1.logic;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity
 @Getter
 @Setter
-@NoArgsConstructor
+@Entity
 @AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "usuario")
 public class Usuario {
     @Id
-    private String idetificacion;
+    @Column(name = "id", nullable = false, length = 45)
+    private String id;
+
+    @Column(name = "clave", length = 45)
     private String clave;
+
+    @Column(name = "tipo", length = 45)
     private String tipo;
+
 }

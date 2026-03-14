@@ -24,7 +24,7 @@ public class Service {
     }
 
     public void agregarPuesto(Puesto p){
-        if (puestos.existsById(p.getId())) {
+        if (puestos.existsById(String.valueOf(p.getId()))) {
             throw new IllegalArgumentException("Puesto ya existe");
         }
         puestos.save(p);
@@ -35,21 +35,21 @@ public class Service {
     }
 
     public void agregarEmpresa(Empresa empresa) {
-        if(empresas.existsById(empresa.getId())){
+        if(empresas.existsById(String.valueOf(empresa.getId()))){
             throw new IllegalArgumentException("Empresa ya existe");
         }
         empresas.save(empresa);
     }
 
     public boolean verificarUsuario(Usuario usuario) {
-        if(!usuarios.existsById(usuario.getIdetificacion())){
+        if(!usuarios.existsById(String.valueOf(usuario.getId()))){
             throw new IllegalArgumentException("Usuario no existe");
         }
         return true;
     }
 
     public void crearUsuario(Usuario usuario) {
-        if(usuarios.existsById(usuario.getIdetificacion())){
+        if(usuarios.existsById(String.valueOf(usuario.getId()))){
             throw new IllegalArgumentException("Usuario existe");
         }
         usuarios.save(usuario);
