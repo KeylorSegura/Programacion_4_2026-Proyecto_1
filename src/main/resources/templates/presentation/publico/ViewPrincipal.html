@@ -1,58 +1,28 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <meta charset="UTF-8">
+  <meta charset="UTF-8">
   <title>Bolsa de Empleo</title>
   <link rel="stylesheet" th:href="@{/css/styles.css}" type="text/css">
 </head>
 <body>
-
-  <header class="navbar">
-
-    <div class="logo">
-      <img src="/images/logo.png" alt="logo">
-      <span>BolsaEmpleo</span>
-
-      <nav>
-        <a href="/presentation/empresa/show">Buscar puestos</a>
-        <a href="/presentation/empresa/registrar">Registro Empresa</a>
-        <a href="/">Registro Oferente</a>
-      </nav>
-
-    </div>
-
-
-    <div class="login">
-      <a href="/presentation/login/form">Login</a>
-    </div>
-
-  </header>
-
+<header th:replace="presentation/fragments/header :: header"></header>
   <div class="container">
-
     <h1>Bolsa de Empleo</h1>
     <p class="subtitulo">Últimos 5 puestos públicos</p>
-
     <p th:if="${#lists.isEmpty(puestos)}">
       No hay puestos disponibles.
     </p>
-
     <div class="jobs" th:unless="${#lists.isEmpty(puestos)}">
-
       <div class="card" th:each="p : ${puestos}">
-
         <h3 th:text="${p.empresa}"></h3>
-
         <p th:text="${p.nombre}"></p>
-
         <p class="salario"
            th:text="'₡ ' + ${#numbers.formatDecimal(p.salario,1,'POINT',2,'COMMA')}">
         </p>
-
         <button class="detalleBtn">
           Ver detalle
         </button>
-
         <div class="detalle">
           <strong th:text="${p.nombre}"></strong>
 
@@ -61,28 +31,18 @@
             </li>
           </ul>
         </div>
-
       </div>
-
     </div>
-
   </div>
-
-
   <footer>
-
     <div>
       <strong>Bolsa de Empleo</strong><br>
       Total Soft Inc.
     </div>
-
     <div>
       Contacto: info@bolsaempleo.local<br>
       Créditos: Equipo de desarrollo
     </div>
-
   </footer>
-
-
 </body>
 </html>

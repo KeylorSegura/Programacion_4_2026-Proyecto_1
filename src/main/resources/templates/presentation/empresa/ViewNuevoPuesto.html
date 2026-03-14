@@ -6,27 +6,7 @@
     <link rel="stylesheet" th:href="@{/css/styles.css}" type="text/css">
 </head>
 <body>
-
-<header class="navbar">
-
-    <div class="logo">
-        <img src="/images/logo.png" alt="logo">
-        <span>BolsaEmpleo</span>
-
-        <nav>
-            <a href="/">Buscar puestos</a>
-            <a href="/presentation/empresa/registrar">Registro Empresa</a>
-            <a href="/">Registro Oferente</a>
-        </nav>
-
-    </div>
-
-
-    <div class="login">
-        <a href="/">Login</a>
-    </div>
-
-</header>
+<header th:replace="presentation/fragments/header :: header"></header>
 
 <div class="content">
 
@@ -41,13 +21,10 @@
         <input type="text" th:field="*{descripcion}">
 
         <label>Nombre puesto</label>
-        <input type="text" th:field="*{nombre}">
+        <input type="text" th:field="*{descripcion}">
 
         <label>Salario</label>
         <input type="text" th:field="*{salario}">
-
-        <label>Requisito</label>
-        <input type="text" th:field="*{requisitos}">
 
         <label>Empresa</label>
         <input type="text" th:field="*{empresa}">

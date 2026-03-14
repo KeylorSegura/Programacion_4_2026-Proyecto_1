@@ -7,26 +7,7 @@
 </head>
 
 <body>
-<header class="navbar">
-
-  <div class="logo">
-    <img src="/images/logo.png" alt="logo">
-    <span>BolsaEmpleo</span>
-
-    <nav>
-      <a href="/">Buscar puestos</a>
-      <a href="/presentation/empresa/registrar">Registro Empresa</a>
-      <a href="/">Registro Oferente</a>
-    </nav>
-
-  </div>
-
-
-  <div class="login">
-    <a href="/">Login</a>
-  </div>
-
-</header>
+<header th:replace="presentation/fragments/header :: header"></header>
 
 <main>
   <div class="form-container">
@@ -35,7 +16,7 @@
     <form method="POST" th:object="${usuario}" th:action="@{/presentation/login/crearCuenta}" >
 
       <label>Identificador</label>
-      <input type="text" th:field="*{idetificacion}" required>
+      <input type="text" th:field="*{id}" required>
 
       <label>Clave</label>
       <input type="text" th:field="*{clave}" required>
@@ -55,7 +36,7 @@
     <form method="GET" th:object="${usuario}" th:action="@{/presentation/login/iniciarSesion}" >
 
       <label>Identificador</label>
-      <input type="text" th:field="*{idetificacion}" required>
+      <input type="text" th:field="*{id}" required>
 
       <label>Clave</label>
       <input type="text" th:field="*{clave}" required>
