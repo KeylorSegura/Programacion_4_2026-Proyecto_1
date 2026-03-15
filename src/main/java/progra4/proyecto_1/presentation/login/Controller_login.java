@@ -27,6 +27,10 @@ public class Controller_login {
     public String iniciarSesion(@ModelAttribute Usuario usuario){
         boolean isCorrect = service.verificarUsuario(usuario);
         if(isCorrect){
+            //Verificacion temporal, es para tener una forma de acceder al dashboard sin cambiar la url
+            if(service.verificarAdmin(usuario)){
+                return "redirect:/presentation/admin/dashboard";
+            }
             return "redirect:/presentation/publico/principal";
         } else {
             return "/presentation/login";

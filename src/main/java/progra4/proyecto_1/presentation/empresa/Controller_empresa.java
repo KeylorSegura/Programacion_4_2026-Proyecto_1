@@ -21,8 +21,11 @@ public class Controller_empresa {
     }
 
     @PostMapping("/crearEmpresa")
-    public String create(@ModelAttribute Empresa empresa) {
-        service.agregarEmpresa(empresa);
+    public String create(@ModelAttribute Empresa empresa, @RequestParam String nombreUsuario) {
+        empresa.setEstado((byte) 0);
+
+        service.agregarEmpresa(empresa, nombreUsuario);
+
         return "redirect:/presentation/publico/principal";
     }
 

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Empresas Pendientes</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" type="text/css">
+</head>
+
+<body>
+<header th:replace="presentation/fragments/headerAdmin :: headerAdmin"></header>
+<h2>Empresas pendientes</h2>
+
+<table border="1">
+
+    <tr>
+        <th>Nombre</th>
+        <th>Autorizar</th>
+    </tr>
+
+    <tr th:each="e : ${empresas}">
+
+        <td th:text="${e.nombre}"></td>
+
+        <td>
+            <form th:action="@{/presentation/admin/autorizarEmpresa/{id}(id=${e.id})}" method="post">
+                <button type="submit">Autorizar</button>
+            </form>
+        </td>
+
+    </tr>
+
+</table>
+
+<footer>
+
+    <div>
+        <strong>Bolsa de Empleo</strong><br>
+        Total Soft Inc.
+    </div>
+
+    <div>
+        Contacto: info@bolsaempleo.local<br>
+        Créditos: Equipo de desarrollo
+    </div>
+</footer>
+</body>
+</html>

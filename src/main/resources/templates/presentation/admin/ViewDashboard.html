@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" type="text/css">
+</head>
+
+<body>
+<header th:replace="presentation/fragments/headerAdmin :: headerAdmin"></header>
+
+<h1>Administrador</h1>
+<p>Aprobaciones, catálogo de características y reportes.</p>
+
+<a th:href="@{/presentation/admin/empresasPendientes}">
+    <button>Empresas pendientes</button>
+</a>
+
+<a th:href="@{/presentation/admin/oferentesPendientes}">
+    <button>Oferentes pendientes</button>
+</a>
+
+<a>
+    <button>Características</button>
+</a>
+
+<a>
+    <button>Reportes</button>
+</a>
+
+<footer>
+
+    <div>
+        <strong>Bolsa de Empleo</strong><br>
+        Total Soft Inc.
+    </div>
+
+    <div>
+        Contacto: info@bolsaempleo.local<br>
+        Créditos: Equipo de desarrollo
+    </div>
+</footer>
+
+</body>
+</html>
