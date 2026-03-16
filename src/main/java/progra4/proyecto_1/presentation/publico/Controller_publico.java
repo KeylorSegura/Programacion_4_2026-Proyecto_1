@@ -30,11 +30,11 @@ public class Controller_publico {
         return "presentation/publico/Pruebaaa";
     }
 
-    @PostMapping("/create")
-    public String create(@ModelAttribute Puesto puesto) {
-
-        service.agregarPuesto(puesto);
-
-        return "redirect:/presentation/publico/principal";
-    }
+//    @PostMapping("/create")
+//    public String create(@ModelAttribute Puesto puesto) {
+//
+//        service.agregarPuesto(puesto);
+//
+//        return "redirect:/presentation/publico/principal";
+//    }
 }

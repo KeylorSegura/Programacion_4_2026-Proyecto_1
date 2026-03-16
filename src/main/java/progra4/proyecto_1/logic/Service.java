@@ -1,12 +1,15 @@
 package progra4.proyecto_1.logic;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import progra4.proyecto_1.data.CaracteristicaRepository;
 import progra4.proyecto_1.data.EmpresaRepository;
 import progra4.proyecto_1.data.OferenteRepository;
 import progra4.proyecto_1.data.PuestoRepository;
+import progra4.proyecto_1.data.PuestocaracteristicaRepository;
 import progra4.proyecto_1.data.UsuarioRepository;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 @org.springframework.stereotype.Service
@@ -19,6 +22,10 @@ public class Service {
     private UsuarioRepository usuarios;
     @Autowired
     private OferenteRepository oferentes;
+    @Autowired
+    private CaracteristicaRepository caracteristicas;
+    @Autowired
+    private PuestocaracteristicaRepository puestoCaracteristicas;
 
     public List<Puesto> findAll(){
         return puestos.findAll();
@@ -29,11 +36,29 @@ public class Service {
         return ultimos.stream().limit(5).toList();
     }
 
-    public void agregarPuesto(Puesto p){
-        if (puestos.existsById(String.valueOf(p.getId()))) {
-            throw new IllegalArgumentException("Puesto ya existe");
-        }
+    public Empresa getEmpresaPorUsuario(String nombreUsuario) {
+        return empresas.findByNombreUsuarioId(nombreUsuario);
+    }
+
+    public void agregarPuesto(Puesto p, List<Integer> caracteristicaIds, Map<Integer, Integer> niveles) {
         puestos.save(p);
+        for (Integer cid : caracteristicaIds) {
+            Caracteristica c = caracteristicas.findById(cid).orElseThrow();
+            Puestocaracteristica pc = new Puestocaracteristica();
+            pc.setPuesto(p);
+            pc.setCaracteristica(c);
+            pc.setNivel(niveles.getOrDefault(cid, 1));
+            puestoCaracteristicas.save(pc);
+        }
+    }
+
+    public List<Caracteristica> getCaracteristicasRaiz() {
+//        List<Caracteristica> todas = caracteristicas.findAll();
+//
+//        return todas.stream()
+//                .filter(c -> c.getPadre() != null && c.getPadre().getId().equals(c.getId()))
+//                .toList();
+        return caracteristicas.findRoots();
     }
 
     public void eliminarTodosPuestos(){
@@ -82,6 +107,11 @@ public class Service {
     public List<Oferente> oferentesPendientes(){
         return oferentes.findByEstado(0);
     }
+
+    public List<Oferente> oferentesAutorizados(){
+        return oferentes.findByEstado(1);
+    }
+
     public void autorizarEmpresa(String id){
         Empresa e = empresas.findById(Integer.valueOf(id)).orElseThrow();
         e.setEstado((byte) 1);

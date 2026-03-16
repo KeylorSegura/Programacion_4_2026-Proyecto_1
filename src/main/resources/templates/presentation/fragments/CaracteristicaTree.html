@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<!--
+    Fragmento recursivo para renderizar el árbol de características.
+-->
+<div th:fragment="arbol(nodo)">
+    <details>
+        <summary>
+            <input type="checkbox" name="caracteristicaIds" th:value="${nodo.id}">
+            <span th:text="${nodo.nombre}"></span>
+            <label>Nivel:
+                <input type="number" th:name="'nivel_' + ${nodo.id}" min="1" max="5" value="1" >
+            </label>
+        </summary>
+        <div th:if="${nodo.caracteristicas != null and not nodo.caracteristicas.isEmpty()}">
+            <th:block th:each="hijo : ${nodo.caracteristicas}">
+                <th:block th:if="${hijo.id != nodo.id}">
+                    <div th:replace="~{presentation/fragments/CaracteristicaTree :: arbol(${hijo})}"></div>
+                </th:block>
+            </th:block>
+        </div>
+    </details>
+</div>
+
+</body>
+</html>

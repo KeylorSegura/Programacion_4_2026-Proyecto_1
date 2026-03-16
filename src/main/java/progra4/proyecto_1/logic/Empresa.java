@@ -47,5 +47,4 @@ public class Empresa {
 
     @OneToMany(mappedBy = "empresa")
     private Set<Puesto> puestos = new LinkedHashSet<>();
-
 }

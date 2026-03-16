@@ -1,5 +1,6 @@
 package progra4.proyecto_1.presentation.empresa;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,6 +8,10 @@ import org.springframework.web.bind.annotation.*;
 import progra4.proyecto_1.logic.Empresa;
 import progra4.proyecto_1.logic.Puesto;
 import progra4.proyecto_1.logic.Service;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/presentation/empresa")
@@ -29,18 +34,28 @@ public class Controller_empresa {
         return "redirect:/presentation/publico/principal";
     }
 
-    @GetMapping("/show")
-    public String show(Model model) {
+    @GetMapping("/registrar/puesto")
+    public String registrarPuesto(Model model) {
         model.addAttribute("puesto", new Puesto());
-        service.eliminarTodosPuestos();
+        model.addAttribute("caracteristicasRaiz", service.getCaracteristicasRaiz());
         return "presentation/empresa/ViewNuevoPuesto";
     }
 
     @PostMapping("/crearPuesto")
-    public String create(@ModelAttribute Puesto puesto) {
-        service.agregarPuesto(puesto);
+    public String create(@ModelAttribute Puesto puesto,
+                         @RequestParam(required = false) List<Integer> caracteristicaIds,
+                         HttpServletRequest request) {
+        Map<Integer, Integer> niveles = new HashMap<>();
+        for (Map.Entry<String, String[]> entry : request.getParameterMap().entrySet()) {
+            if (entry.getKey().startsWith("nivel_")) {
+                int id = Integer.parseInt(entry.getKey().substring(6));
+                int nivel = Integer.parseInt(entry.getValue()[0]);
+                niveles.put(id, nivel);
+            }
+        }
+        puesto.setActivo((byte) 1);
+        puesto.setEmpresa(service.getEmpresaPorUsuario("google"));
+        service.agregarPuesto(puesto, caracteristicaIds != null ? caracteristicaIds : List.of(), niveles);
         return "redirect:/presentation/publico/principal";
     }
-
-
 }

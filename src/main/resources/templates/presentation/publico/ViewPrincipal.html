@@ -7,33 +7,33 @@
 </head>
 <body>
 <header th:replace="presentation/fragments/header :: header"></header>
-  <div class="container">
-    <h1>Bolsa de Empleo</h1>
-    <p class="subtitulo">Últimos 5 puestos públicos</p>
-    <p th:if="${#lists.isEmpty(puestos)}">
-      No hay puestos disponibles.
-    </p>
-    <div class="jobs" th:unless="${#lists.isEmpty(puestos)}">
-      <div class="card" th:each="p : ${puestos}">
-        <h3 th:text="${p.empresa}"></h3>
-        <p th:text="${p.nombre}"></p>
-        <p class="salario"
-           th:text="'₡ ' + ${#numbers.formatDecimal(p.salario,1,'POINT',2,'COMMA')}">
-        </p>
-        <button class="detalleBtn">
-          Ver detalle
-        </button>
-        <div class="detalle">
-          <strong th:text="${p.nombre}"></strong>
+<!--  <div class="container">-->
+<!--    <h1>Bolsa de Empleo</h1>-->
+<!--    <p class="subtitulo">Últimos 5 puestos públicos</p>-->
+<!--    <p th:if="${#lists.isEmpty(puestos)}">-->
+<!--      No hay puestos disponibles.-->
+<!--    </p>-->
+<!--    <div class="jobs" th:unless="${#lists.isEmpty(puestos)}">-->
+<!--      <div class="card" th:each="p : ${puestos}">-->
+<!--        <h3 th:text="${p.empresa}"></h3>-->
+<!--        <p th:text="${p.nombre}"></p>-->
+<!--        <p class="salario"-->
+<!--           th:text="'₡ ' + ${#numbers.formatDecimal(p.salario,1,'POINT',2,'COMMA')}">-->
+<!--        </p>-->
+<!--        <button class="detalleBtn">-->
+<!--          Ver detalle-->
+<!--        </button>-->
+<!--        <div class="detalle">-->
+<!--          <strong th:text="${p.nombre}"></strong>-->
 
-          <ul>
-            <li th:text="${p.requisitos}">
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
+<!--&lt;!&ndash;          <ul>&ndash;&gt;-->
+<!--&lt;!&ndash;            <li th:text="${p.requisitos}">&ndash;&gt;-->
+<!--&lt;!&ndash;            </li>&ndash;&gt;-->
+<!--&lt;!&ndash;          </ul>&ndash;&gt;-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
   <footer>
     <div>
       <strong>Bolsa de Empleo</strong><br>
