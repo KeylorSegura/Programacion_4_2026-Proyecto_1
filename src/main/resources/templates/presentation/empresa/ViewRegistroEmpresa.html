@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Registrar Empresa</title>
@@ -14,8 +14,11 @@
 
     <form method="POST" th:object="${empresa}" th:action="@{/presentation/empresa/crearEmpresa}">
 
-      <label>ID del usuario</label>
-      <input type="text" th:field="*{nombreUsuario}" required>
+      <label>Nombre del usuario</label>
+      <input type="text" name="nombreUsuario" required>
+
+      <label>Clave</label>
+      <input type="password" name="clave" required>
 
       <label>Nombre de la empresa</label>
       <input type="text" th:field="*{nombre}" required>

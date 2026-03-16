@@ -65,13 +65,15 @@ public class Service {
         puestos.deleteAll();
     }
 
-    public void agregarEmpresa(Empresa empresa, String idUsuario){
+    public void agregarEmpresa(Empresa empresa, String idUsuario, String clave){
+        if (usuarios.existsById(idUsuario)) {
+            throw new IllegalArgumentException("El nombre de usuario ya existe");
+        }
 
-        Usuario usuario = usuarios.findById(idUsuario)
-                .orElseThrow(() -> new RuntimeException("Usuario no existe"));
+        Usuario usuario = new Usuario(idUsuario, clave, "Empresa");
+        usuarios.save(usuario);
 
         empresa.setNombreUsuario(usuario);
-
         empresas.save(empresa);
     }
 
