@@ -1,167 +1,150 @@
-body{
-    margin:0;
+body {
+    margin: 0;
     font-family: Arial, Helvetica, sans-serif;
-    background:#f5f5f5;
+    background: #f5f5f5;
     min-height: 100vh;
 }
 
-main{
+/* ===== INICIO: Estilos del header ===== */
+.navbar {
+    background: black;
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 10px 25px;
+    gap: 10px;
+}
+
+.navbar__brand {
+    display: flex;
     align-items: center;
 }
 
-
-
-.navbar{
-    background:black;
-    color:white;
-    display:flex;
-    align-items:center;
-    padding:10px 25px;
-    gap:10px;
+.navbar__brand-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: white;
 }
 
-.navbar__brand{
-    display:flex;
-    align-items:center;
+.navbar__logo {
+    width: 35px;
+    height: 35px;
+    object-fit: contain;
 }
 
-.navbar__brand-link{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    text-decoration:none;
-    color:white;
+.navbar__title {
+    font-size: 18px;
+    font-weight: bold;
 }
 
-.navbar__logo{
-    width:35px;
-    height:35px;
-    object-fit:contain;
+.navbar__nav {
+    display: flex;
+    align-items: center;
 }
 
-.navbar__title{
-    font-size:18px;
-    font-weight:bold;
+.navbar__nav-link {
+    color: darkgrey;
+    margin: 0 15px;
+    text-decoration: none;
 }
 
-.navbar__nav{
-    display:flex;
-    align-items:center;
+.navbar__nav-link:hover {
+    color: white;
 }
 
-.navbar__nav-link{
-    color:darkgrey;
-    margin:0 15px;
-    text-decoration:none;
+.navbar__login {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
 }
 
-.navbar__nav-link:hover{
-    color:white;
+.navbar__login-link {
+    color: white;
+    text-decoration: none;
 }
 
-.navbar__login{
-    display:flex;
-    align-items:center;
-    margin-left:auto;
+/* ===== FIN: Estilos del header ===== */
+
+main {
+    align-items: center;
 }
 
-.navbar__login-link{
-    color:white;
-    text-decoration:none;
+.container {
+    padding: 40px 60px;
 }
 
-
-
-
-.container{
-    padding:40px 60px;
+.subtitulo {
+    color: gray;
 }
 
-.subtitulo{
-    color:gray;
-}
-
-
-
-.jobs{
-    margin-top:25px;
-    display:grid;
+.jobs {
+    margin-top: 25px;
+    display: grid;
     grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
     justify-content: center;
-    gap:25px;
+    gap: 25px;
 }
 
+.card {
+    background: #e8f2e6;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #cfdacb;
 
-
-
-.card{
-    background:#e8f2e6;
-    padding:20px;
-    border-radius:10px;
-    border:1px solid #cfdacb;
-
-    position:relative;
+    position: relative;
 }
 
-.salario{
-    font-weight:bold;
+.salario {
+    font-weight: bold;
 }
 
-
-.detalleDespliegue{
+.detalleDespliegue {
     position: relative;
     width: 100%;
 }
 
-.detalleBtn{
-    width:100%;
-    padding:10px;
-    border-radius:6px;
-    border:1px solid #3b82f6;
-    background:#e8f2e6;
-    color:#3b82f6;
+.detalleBtn {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #3b82f6;
+    background: #e8f2e6;
+    color: #3b82f6;
 
-    position:relative;
+    position: relative;
 }
 
-
-.detalle{
-    display:none;
-    position:absolute;
-    width:100%;
-    background:white;
+.detalle {
+    display: none;
+    position: absolute;
+    width: 100%;
+    background: white;
     box-sizing: border-box;
-    border:1px solid #3b82f6;
+    border: 1px solid #3b82f6;
     border-radius: 0 0 8px 8px;
-    padding:15px;
-    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+    padding: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     z-index: 1;
 }
 
-
-
 .detalleDespliegue:hover .detalle {
     display: block;
-
 }
 
 .detalleDespliegue:hover .detalleBtn {
     background-color: #3b82f6;
     color: white;
     border-radius: 6px 6px 0 0;
-
 }
 
-
-
-
-
-footer{
-    margin-top:60px;
-    background:black;
-    color:white;
-    display:flex;
-    justify-content:space-between;
-    padding:15px 40px;
-    font-size:14px;
+footer {
+    margin-top: 60px;
+    background: black;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 40px;
+    font-size: 14px;
 }
