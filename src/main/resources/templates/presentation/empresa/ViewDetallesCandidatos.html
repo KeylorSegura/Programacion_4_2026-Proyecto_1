@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Empresa - Detalles candidato</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" type="text/css">
+</head>
+<body>
+<header th:replace="presentation/fragments/headerEmpresa :: header"></header>
+
+<main>
+    <h1>Detalle del oferente</h1>
+
+    <section>
+        <h2>Detalle de oferente</h2>
+        <h3><span th:text="${oferente.nombre+ ' ' +oferente.primerApellido}"></span></h3>
+        <ul>
+            <li>Identificación: <span th:text="${oferente.id}"></span></li>
+            <li>Email: <span th:text="${oferente.correoElectronico}"></span></li>
+            <li>Teléfono: <span th:text="${oferente.telefono}"></span></li>
+            <li>Residencia: <span th:text="${oferente.lugarResidencia}"></span></li>
+        </ul>
+    </section>
+
+    <section>
+        <h3>Habilidades</h3>
+        <table>
+            <thead>
+            <tr>
+                <th>Caracteristica</th>
+                <th>Nivel</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="oc : ${oferente.oferentecaracteristicas}">
+                <td th:text="${oc.caracteristica.nombre}"></td>
+                <td th:text="${oc.nivel}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+</main>
+</body>
+</html>
