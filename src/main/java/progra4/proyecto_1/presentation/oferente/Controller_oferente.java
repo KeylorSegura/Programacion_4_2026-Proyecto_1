@@ -13,9 +13,4 @@ public class Controller_oferente {
     @Autowired
     private Service service;
 
-    @GetMapping("/list/candidatos")
-    public String listCandidatos(Model model){
-        model.addAttribute("oferentes", service.oferentesAutorizados());
-        return "presentation/empresa/ViewCandidatosPuesto";
-    }
 }

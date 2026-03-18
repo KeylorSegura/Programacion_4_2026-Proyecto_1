@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mis Puestos</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" type="text/css">
+</head>
+<body>
+<header th:replace="presentation/fragments/headerEmpresa :: header"></header>
+<main>
+    <h1>Mis Puestos</h1>
+    <button>
+        <a href="/presentation/empresa/registrar/puesto">Publicar puesto</a>
+    </button>
+
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Descripción</th>
+            <th>Salario</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="puesto : ${empresa.puestos}">
+            <td th:text="${puesto.id}"></td>
+            <td th:text="${puesto.descripcion}"></td>
+            <td th:text="${puesto.salario}"></td>
+            <td th:text="${puesto.activo == 1} ? 'Activo' : 'Inactivo'"></td>
+            <td>
+                <form th:action="@{/presentation/empresa/puesto/toggle-activo/{id}(id=${puesto.id})}" method="post">
+                    <button type="submit"
+                            th:text="${puesto.activo == 1} ? 'Desactivar' : 'Activar'">
+                    </button>
+                </form>
+                <a th:href="@{/presentation/empresa/ver/candidatos/{id}(id=${puesto.id})}">Mostrar Candidatos</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+</body>
+</html>

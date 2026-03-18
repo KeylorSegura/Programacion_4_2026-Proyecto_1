@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mostrar Candidatos</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" type="text/css">
+</head>
+<body>
+<header th:replace="presentation/fragments/headerEmpresa :: header"></header>
+
+<h2>Candidatos para el puesto</h2>
+
+<h2>Puesto: <span th:text="${puesto.descripcion}"></span></h2>
+
+<table>
+    <thead>
+    <tr>
+        <th>Oferente</th>
+        <th>Requisitos cumplidos</th>
+        <th>% Coincidencia</th>
+        <th>Acción</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="candidato : ${candidatos}">
+        <td th:text="${candidato['oferente'].nombre + ' ' + candidato['oferente'].primerApellido}"></td>
+        <td th:text="${candidato['requisitosCumplidos'] + '/' + candidato['totalRequisitos']}"></td>
+        <td th:text="${candidato['porcentajeCoincidencia'] + '%'}"></td>
+        <td>
+            <button type="button"><a href="/">Ver detalles</a></button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
