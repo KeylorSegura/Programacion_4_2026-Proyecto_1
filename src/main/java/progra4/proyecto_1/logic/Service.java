@@ -1,12 +1,8 @@
 package progra4.proyecto_1.logic;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import progra4.proyecto_1.data.CaracteristicaRepository;
-import progra4.proyecto_1.data.EmpresaRepository;
-import progra4.proyecto_1.data.OferenteRepository;
-import progra4.proyecto_1.data.PuestoRepository;
-import progra4.proyecto_1.data.PuestocaracteristicaRepository;
-import progra4.proyecto_1.data.UsuarioRepository;
+import org.springframework.transaction.annotation.Transactional;
+import progra4.proyecto_1.data.*;
 
 import java.util.List;
 import java.util.Map;
@@ -27,7 +23,7 @@ public class Service {
     @Autowired
     private PuestocaracteristicaRepository puestoCaracteristicas;
 
-    public List<Puesto> findAll(){
+    public List<Puesto> findAll() {
         return puestos.findAll();
     }
 
@@ -61,11 +57,11 @@ public class Service {
         return caracteristicas.findRoots();
     }
 
-    public void eliminarTodosPuestos(){
+    public void eliminarTodosPuestos() {
         puestos.deleteAll();
     }
 
-    public void agregarEmpresa(Empresa empresa, String idUsuario, String clave){
+    public void agregarEmpresa(Empresa empresa, String idUsuario, String clave) {
         if (usuarios.existsById(idUsuario)) {
             throw new IllegalArgumentException("El nombre de usuario ya existe");
         }
@@ -78,17 +74,17 @@ public class Service {
     }
 
     public boolean verificarUsuario(Usuario usuario) {
-        if(!usuarios.existsById(String.valueOf(usuario.getId()))){
+        if (!usuarios.existsById(String.valueOf(usuario.getId()))) {
             throw new IllegalArgumentException("Usuario no existe");
         }
         return true;
     }
 
     //Verifica si el usuario que se loggeo es de tipo "Administrador"  -Nando
-    public boolean verificarAdmin(Usuario usuario){
+    public boolean verificarAdmin(Usuario usuario) {
         Usuario verificar = usuarios.findById(usuario.getId()).orElse(null);
 
-        if(verificar == null){
+        if (verificar == null) {
             return false;
         }
 
@@ -96,32 +92,92 @@ public class Service {
     }
 
     public void crearUsuario(Usuario usuario) {
-        if(usuarios.existsById(String.valueOf(usuario.getId()))){
+        if (usuarios.existsById(String.valueOf(usuario.getId()))) {
             throw new IllegalArgumentException("Usuario existe");
         }
         usuarios.save(usuario);
     }
 
-    public List<Empresa> empresasPendientes(){
+    public List<Empresa> empresasPendientes() {
         return empresas.findByEstado(0);
     }
 
-    public List<Oferente> oferentesPendientes(){
+    public List<Oferente> oferentesPendientes() {
         return oferentes.findByEstado(0);
     }
 
-    public List<Oferente> oferentesAutorizados(){
+    public List<Oferente> oferentesAutorizados() {
         return oferentes.findByEstado(1);
     }
 
-    public void autorizarEmpresa(String id){
+    public void autorizarEmpresa(String id) {
         Empresa e = empresas.findById(Integer.valueOf(id)).orElseThrow();
         e.setEstado((byte) 1);
         empresas.save(e);
     }
-    public void autorizarOferente(String id){
+
+    public void autorizarOferente(String id) {
         Oferente o = oferentes.findById(id).orElseThrow();
         o.setEstado((byte) 1);
         oferentes.save(o);
+    }
+
+    public void toggleActivoPuesto(Integer id) {
+        Puesto p = puestos.findById(id).orElseThrow();
+        p.setActivo(p.getActivo() == 1 ? (byte) 0 : (byte) 1);
+        puestos.save(p);
+    }
+
+    public Puesto getPuestoById(Integer id) {
+        return puestos.findById(id).orElseThrow();
+    }
+
+    @Transactional
+    public List<Map<String, Object>> getCandidatosPuesto(Integer puestoId) {
+        Puesto puesto = puestos.findById(puestoId).orElseThrow();
+        List<Puestocaracteristica> requisitos = puesto.getPuestocaracteristicas().stream().toList();
+
+        return oferentes.findAll().stream()
+                .map(oferente -> {
+                    long cumplidos = requisitos.stream().filter(req ->
+                            oferente.getOferentecaracteristicas().stream().anyMatch(oc ->
+                                    oc.getCaracteristica().getId().equals(req.getCaracteristica().getId())
+                                            && oc.getNivel() >= req.getNivel()
+                            )
+                    ).count();
+
+
+                    if (cumplidos == 0) return null;
+
+                    int porcentaje = (int) (cumplidos * 100 / requisitos.size());
+
+                    return Map.<String, Object>of(
+                            "oferente", oferente,
+                            "requisitosCumplidos", (int) cumplidos,
+                            "totalRequisitos", requisitos.size(),
+                            "porcentajeCoincidencia", porcentaje
+                    );
+                })
+                .filter(Objects::nonNull)
+                .toList();
+    }
+
+    @Transactional
+    public List<Oferente> getCandidatosPuestoEstricto(Integer puestoId) {
+        Puesto puesto = puestos.findById(puestoId).orElseThrow();
+        List<Puestocaracteristica> requisitos = puesto.getPuestocaracteristicas().stream().toList();
+
+        if (requisitos.isEmpty()) {
+            return oferentes.findAll();
+        }
+
+        return oferentes.findAll().stream()
+                .filter(oferente -> requisitos.stream().allMatch(req ->
+                        oferente.getOferentecaracteristicas().stream().anyMatch(oc ->
+                                oc.getCaracteristica().getId().equals(req.getCaracteristica().getId())
+                                        && oc.getNivel() >= req.getNivel()
+                        )
+                ))
+                .toList();
     }
 }

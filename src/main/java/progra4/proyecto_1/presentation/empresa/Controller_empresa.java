@@ -25,7 +25,7 @@ public class Controller_empresa {
         return "presentation/empresa/ViewRegistroEmpresa";
     }
 
-    @PostMapping("/crearEmpresa")
+    @PostMapping("/crear-empresa")
     public String create(@ModelAttribute Empresa empresa,
                          @RequestParam String nombreUsuario,
                          @RequestParam String clave) {
@@ -41,7 +41,7 @@ public class Controller_empresa {
         return "presentation/empresa/ViewNuevoPuesto";
     }
 
-    @PostMapping("/crearPuesto")
+    @PostMapping("/crear-puesto")
     public String create(@ModelAttribute Puesto puesto,
                          @RequestParam(required = false) List<Integer> caracteristicaIds,
                          HttpServletRequest request) {
@@ -58,4 +58,31 @@ public class Controller_empresa {
         service.agregarPuesto(puesto, caracteristicaIds != null ? caracteristicaIds : List.of(), niveles);
         return "redirect:/presentation/publico/principal";
     }
+
+    @GetMapping("/Dashboard")
+    public String dashboard(Model model) {
+        model.addAttribute("empresa", service.getEmpresaPorUsuario("google"));
+        return "presentation/empresa/ViewDashboard";
+    }
+
+    @GetMapping("/ver/mis-puestos")
+    public String mispuestos(Model model) {
+        model.addAttribute("empresa", service.getEmpresaPorUsuario("google"));
+        return "presentation/empresa/ViewVerMisPuestos";
+    }
+
+    @PostMapping("/puesto/toggle-activo/{id}")
+    public String toggleActivoPuesto(@PathVariable Integer id) {
+        service.toggleActivoPuesto(id);
+        return "redirect:/presentation/empresa/ver/mis-puestos";
+    }
+
+    @GetMapping("/ver/candidatos/{id}")
+    public String verCandidatos(Model model, @PathVariable Integer id) {
+        model.addAttribute("empresa", service.getEmpresaPorUsuario("google"));
+        model.addAttribute("puesto", service.getPuestoById(id));
+        model.addAttribute("candidatos", service.getCandidatosPuesto(id));
+        return "presentation/empresa/ViewMostrarCandidatos";
+    }
+
 }
