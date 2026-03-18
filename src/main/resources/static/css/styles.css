@@ -15,28 +15,57 @@ main{
     background:black;
     color:white;
     display:flex;
-    justify-content:space-between;
     align-items:center;
     padding:10px 25px;
-}
-
-.logo{
-    display:flex;
-    align-items:center;
     gap:10px;
 }
 
-.logo img{
-    width:35px;
+.navbar__brand{
+    display:flex;
+    align-items:center;
 }
 
-nav a{
-    color: darkgrey;
+.navbar__brand-link{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    text-decoration:none;
+    color:white;
+}
+
+.navbar__logo{
+    width:35px;
+    height:35px;
+    object-fit:contain;
+}
+
+.navbar__title{
+    font-size:18px;
+    font-weight:bold;
+}
+
+.navbar__nav{
+    display:flex;
+    align-items:center;
+}
+
+.navbar__nav-link{
+    color:darkgrey;
     margin:0 15px;
     text-decoration:none;
 }
 
-.login a{
+.navbar__nav-link:hover{
+    color:white;
+}
+
+.navbar__login{
+    display:flex;
+    align-items:center;
+    margin-left:auto;
+}
+
+.navbar__login-link{
     color:white;
     text-decoration:none;
 }

@@ -1,14 +1,16 @@
 <header class="navbar" th:fragment="header">
-    <div class="logo">
-        <img src="/images/logo.png" alt="logo">
-        <span>BolsaEmpleo</span>
-        <nav>
-            <a href="/">Buscar puestos</a>
-            <a href="/presentation/empresa/registrar">Registro Empresa</a>
-            <a href="/">Registro Oferente</a>
-        </nav>
+    <div class="navbar__brand">
+        <a class="navbar__brand-link" href="/">
+            <img class="navbar__logo" src="/images/logo.png" alt="logo">
+            <span class="navbar__title">BolsaEmpleo</span>
+        </a>
     </div>
-    <div class="login">
-        <a href="/presentation/login/form">Login</a>
+    <nav class="navbar__nav">
+        <a class="navbar__nav-link" href="/">Buscar puestos</a>
+        <a class="navbar__nav-link" href="/presentation/empresa/registrar">Registro Empresa</a>
+        <a class="navbar__nav-link" href="/">Registro Oferente</a>
+    </nav>
+    <div class="navbar__login">
+        <a class="navbar__login-link" href="/presentation/login/form">Login</a>
     </div>
 </header>
