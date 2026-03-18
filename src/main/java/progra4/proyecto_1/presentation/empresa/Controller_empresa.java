@@ -25,7 +25,7 @@ public class Controller_empresa {
         return "presentation/empresa/ViewRegistroEmpresa";
     }
 
-    @PostMapping("/crear-empresa")
+    @PostMapping("/registrar")
     public String create(@ModelAttribute Empresa empresa,
                          @RequestParam String nombreUsuario,
                          @RequestParam String clave) {
@@ -34,14 +34,20 @@ public class Controller_empresa {
         return "redirect:/presentation/publico/principal";
     }
 
-    @GetMapping("/registrar/puesto")
+    @GetMapping("/dashboard")
+    public String dashboard(Model model) {
+        model.addAttribute("empresa", service.getEmpresaPorUsuario("google"));
+        return "presentation/empresa/ViewDashboard";
+    }
+
+    @GetMapping("/puesto/registrar")
     public String registrarPuesto(Model model) {
         model.addAttribute("puesto", new Puesto());
         model.addAttribute("caracteristicasRaiz", service.getCaracteristicasRaiz());
         return "presentation/empresa/ViewNuevoPuesto";
     }
 
-    @PostMapping("/crear-puesto")
+    @PostMapping("/puesto/registrar")
     public String create(@ModelAttribute Puesto puesto,
                          @RequestParam(required = false) List<Integer> caracteristicaIds,
                          HttpServletRequest request) {
@@ -59,30 +65,31 @@ public class Controller_empresa {
         return "redirect:/presentation/publico/principal";
     }
 
-    @GetMapping("/Dashboard")
-    public String dashboard(Model model) {
-        model.addAttribute("empresa", service.getEmpresaPorUsuario("google"));
-        return "presentation/empresa/ViewDashboard";
+    @PostMapping("/puesto/toggle-activo/{id}")
+    public String toggleActivoPuesto(@PathVariable Integer id) {
+        service.toggleActivoPuesto(id);
+        return "redirect:/presentation/empresa/puestos";
     }
 
-    @GetMapping("/ver/mis-puestos")
+    @GetMapping("/puestos")
     public String mispuestos(Model model) {
         model.addAttribute("empresa", service.getEmpresaPorUsuario("google"));
         return "presentation/empresa/ViewVerMisPuestos";
     }
 
-    @PostMapping("/puesto/toggle-activo/{id}")
-    public String toggleActivoPuesto(@PathVariable Integer id) {
-        service.toggleActivoPuesto(id);
-        return "redirect:/presentation/empresa/ver/mis-puestos";
-    }
-
-    @GetMapping("/ver/candidatos/{id}")
-    public String verCandidatos(Model model, @PathVariable Integer id) {
+    @GetMapping("/candidatos/puesto")
+    public String verCandidatos(Model model, @RequestParam Integer id) {
         model.addAttribute("empresa", service.getEmpresaPorUsuario("google"));
         model.addAttribute("puesto", service.getPuestoById(id));
         model.addAttribute("candidatos", service.getCandidatosPuesto(id));
         return "presentation/empresa/ViewMostrarCandidatos";
+    }
+
+    @GetMapping("/candidatos/oferente")
+    public String verOferente(Model model, @RequestParam Integer id) {
+        model.addAttribute("empresa", service.getEmpresaPorUsuario("google"));
+        model.addAttribute("oferente", service.getOferenteById(id));
+        return "presentation/empresa/ViewDetallesCandidatos";
     }
 
 }

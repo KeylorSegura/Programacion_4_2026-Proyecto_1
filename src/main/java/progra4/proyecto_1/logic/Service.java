@@ -7,6 +7,7 @@ import progra4.proyecto_1.data.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 
 @org.springframework.stereotype.Service
 public class Service {
@@ -179,5 +180,9 @@ public class Service {
                         )
                 ))
                 .toList();
+    }
+
+    public Optional<Oferente> getOferenteById(Integer id) {
+        return oferentes.findById(String.valueOf(id));
     }
 }

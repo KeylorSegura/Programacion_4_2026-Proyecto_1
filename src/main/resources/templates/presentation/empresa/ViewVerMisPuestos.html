@@ -10,7 +10,7 @@
 <main>
     <h1>Mis Puestos</h1>
     <button>
-        <a href="/presentation/empresa/registrar/puesto">Publicar puesto</a>
+        <a href="/presentation/empresa/puesto/registrar">Publicar puesto</a>
     </button>
 
     <table>
@@ -35,7 +35,7 @@
                             th:text="${puesto.activo == 1} ? 'Desactivar' : 'Activar'">
                     </button>
                 </form>
-                <a th:href="@{/presentation/empresa/ver/candidatos/{id}(id=${puesto.id})}">Mostrar Candidatos</a>
+                <a th:href="@{/presentation/empresa/candidatos/puesto(id=${puesto.id})}">Mostrar Candidatos</a>
             </td>
         </tr>
         </tbody>
