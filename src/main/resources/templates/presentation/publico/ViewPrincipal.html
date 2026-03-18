@@ -9,33 +9,39 @@
 <header th:replace="presentation/fragments/header :: header"></header>
 <header th:replace="presentation/fragments/headerAdmin :: header"></header>
 <header th:replace="presentation/fragments/headerEmpresa :: header"></header>
-<!--  <div class="container">-->
-<!--    <h1>Bolsa de Empleo</h1>-->
-<!--    <p class="subtitulo">Últimos 5 puestos públicos</p>-->
-<!--    <p th:if="${#lists.isEmpty(puestos)}">-->
-<!--      No hay puestos disponibles.-->
-<!--    </p>-->
-<!--    <div class="jobs" th:unless="${#lists.isEmpty(puestos)}">-->
-<!--      <div class="card" th:each="p : ${puestos}">-->
-<!--        <h3 th:text="${p.empresa}"></h3>-->
-<!--        <p th:text="${p.nombre}"></p>-->
-<!--        <p class="salario"-->
-<!--           th:text="'₡ ' + ${#numbers.formatDecimal(p.salario,1,'POINT',2,'COMMA')}">-->
-<!--        </p>-->
-<!--        <button class="detalleBtn">-->
-<!--          Ver detalle-->
-<!--        </button>-->
-<!--        <div class="detalle">-->
-<!--          <strong th:text="${p.nombre}"></strong>-->
+  <div class="container">
+    <h1>Bolsa de Empleo</h1>
+    <p class="subtitulo">Últimos 5 puestos públicos</p>
+    <p th:if="${#lists.isEmpty(puestos)}">
+      No hay puestos disponibles.
+    </p>
+    <div class="jobs" th:unless="${#lists.isEmpty(puestos)}">
+      <div class="card" th:each="p : ${puestos}">
+        <h3 th:text="${p.empresa.nombre}"></h3>
+        <p th:text="${p.descripcion}"></p>
+        <p class="salario"
+           th:text="'₡ ' + ${#numbers.formatDecimal(p.salario,1,'POINT',2,'COMMA')}">
+        </p>
+        <div class ="detalleDespliegue">
+          <button class="detalleBtn">
+            Ver detalle
+          </button>
+          <div class="detalle">
+            <strong th:text="${p.descripcion}"></strong>
 
-<!--&lt;!&ndash;          <ul>&ndash;&gt;-->
-<!--&lt;!&ndash;            <li th:text="${p.requisitos}">&ndash;&gt;-->
-<!--&lt;!&ndash;            </li>&ndash;&gt;-->
-<!--&lt;!&ndash;          </ul>&ndash;&gt;-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
+            <ul>
+              <li th:each="pc : ${p.puestocaracteristicas}">
+                <span th:text="${pc.caracteristica.nombre}"></span>
+                -
+                Nivel:
+                <span th:text="${pc.nivel}"></span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <footer>
     <div>
       <strong>Bolsa de Empleo</strong><br>
