@@ -7,6 +7,8 @@ import progra4.proyecto_1.logic.Caracteristica;
 import java.util.List;
 
 public interface CaracteristicaRepository extends JpaRepository<Caracteristica, Integer> {
-    @Query("SELECT c FROM Caracteristica c WHERE c.padre.id = c.id")
+    @Query("SELECT c FROM Caracteristica c WHERE c.padre.id IS NULL")
     List<Caracteristica> findRoots();
+
+    List<Caracteristica> padre(Caracteristica padre);
 }

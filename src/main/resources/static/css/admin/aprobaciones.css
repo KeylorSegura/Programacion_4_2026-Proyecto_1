@@ -1,0 +1,144 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.aprobaciones {
+    flex: 1;
+    padding: 40px 24px;
+    background-color: #f5f7f9;
+}
+
+.aprobaciones__container {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.aprobaciones__title {
+    margin: 0 0 24px;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1f2937;
+}
+
+.aprobaciones__card {
+    background-color: #ffffff;
+    border-radius: 14px;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+}
+
+.aprobaciones__table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.aprobaciones__head {
+    background-color: #ffffff;
+}
+
+.aprobaciones__row {
+    transition: background-color 0.2s ease;
+}
+
+.aprobaciones__row:nth-child(odd) {
+    background-color: #f3f4f6;
+}
+
+.aprobaciones__row:nth-child(even) {
+    background-color: #ffffff;
+}
+
+.aprobaciones__row:hover {
+    background-color: #eef6ff;
+}
+
+.aprobaciones__cell {
+    padding: 18px 20px;
+    text-align: left;
+    font-size: 0.95rem;
+    color: #374151;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.aprobaciones__head .aprobaciones__cell {
+    font-weight: 700;
+    color: #111827;
+    background-color: #ffffff;
+}
+
+.aprobaciones__cell--action {
+    width: 320px;
+}
+
+.aprobaciones__form {
+    margin: 0;
+}
+
+.aprobaciones__button {
+    border: none;
+    border-radius: 6px;
+    background-color: #1f9d63;
+    color: #ffffff;
+    padding: 10px 16px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.aprobaciones__button:hover {
+    background-color: #188553;
+    transform: translateY(-1px);
+}
+
+.aprobaciones__button:active {
+    transform: translateY(0);
+}
+
+.footer {
+    color: #ffffff;
+    padding: 18px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+    margin-top: 0;
+}
+
+.footer__info {
+    line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+    .aprobaciones {
+        padding: 24px 14px;
+    }
+
+    .aprobaciones__title {
+        font-size: 1.6rem;
+    }
+
+    .aprobaciones__cell {
+        padding: 12px 14px;
+        font-size: 0.88rem;
+    }
+
+    .aprobaciones__button {
+        width: 100%;
+    }
+
+    .footer {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+}

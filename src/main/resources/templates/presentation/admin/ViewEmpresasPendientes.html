@@ -4,44 +4,55 @@
     <meta charset="UTF-8">
     <title>Empresas Pendientes</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/admin/aprobaciones.css}" type="text/css">
 </head>
-
 <body>
+
 <header th:replace="presentation/fragments/headerAdmin :: headerAdmin"></header>
-<h2>Empresas pendientes</h2>
 
-<table border="1">
+<main class="aprobaciones">
+    <div class="aprobaciones__container">
+        <h2 class="aprobaciones__title">Empresas pendientes</h2>
 
-    <tr>
-        <th>Nombre</th>
-        <th>Autorizar</th>
-    </tr>
+        <div class="aprobaciones__card">
+            <table class="aprobaciones__table">
+                <thead class="aprobaciones__head">
+                <tr class="aprobaciones__row">
+                    <th class="aprobaciones__cell">Usuario</th>
+                    <th class="aprobaciones__cell aprobaciones__cell--action">Acción</th>
+                </tr>
+                </thead>
 
-    <tr th:each="e : ${empresas}">
+                <tbody>
+                <tr class="aprobaciones__row" th:each="e : ${empresas}">
+                    <td class="aprobaciones__cell" th:text="${e.nombre}"></td>
+                    <td class="aprobaciones__cell aprobaciones__cell--action">
+                        <form class="aprobaciones__form"
+                              th:action="@{/presentation/admin/autorizarEmpresa/{id}(id=${e.id})}"
+                              method="post">
+                            <button class="aprobaciones__button" type="submit">
+                                Aprobar y generar clave
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
 
-        <td th:text="${e.nombre}"></td>
-
-        <td>
-            <form th:action="@{/presentation/admin/autorizarEmpresa/{id}(id=${e.id})}" method="post">
-                <button type="submit">Autorizar</button>
-            </form>
-        </td>
-
-    </tr>
-
-</table>
-
-<footer>
-
-    <div>
+<footer class="footer">
+    <div class="footer__info">
         <strong>Bolsa de Empleo</strong><br>
         Total Soft Inc.
     </div>
 
-    <div>
+    <div class="footer__info">
         Contacto: info@bolsaempleo.local<br>
         Créditos: Equipo de desarrollo
     </div>
 </footer>
+
 </body>
 </html>

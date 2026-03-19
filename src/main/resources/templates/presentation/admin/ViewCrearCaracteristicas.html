@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Caracteristicas</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/admin/crearCaracteristica.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/caracteristicaTree.css}" type="text/css">
+</head>
+
+<body>
+
+<header th:replace="presentation/fragments/headerAdmin :: headerAdmin"></header>
+
+<main class="caracteristicas">
+
+    <h2 class="caracteristicas__titulo">Características</h2>
+
+    <div class="caracteristicas__contenedor">
+
+        <!-- ================= IZQUIERDA ================= -->
+        <section class="caracteristicas__panel caracteristicas__panel--arbol">
+
+            <div class="panel panel--verde">
+
+                <div class="panel__header">
+                    <span class="panel__ruta">Ruta:</span>
+
+                    <!-- EJEMPLO DE BREADCRUMB -->
+                    <div class="panel__breadcrumbs">
+                        <span class="badge">Raíces</span>
+                        <span class="badge">Testing</span>
+                        <span class="badge">JUnit</span>
+                    </div>
+                </div>
+
+                <div class="panel__contenido">
+
+                    <!-- Aquí metés el árbol -->
+                    <div th:each="raiz : ${caracteristicasRaiz}">
+                        <div th:replace="~{presentation/fragments/CaracteristicaTree :: arbol(${raiz})}"></div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- ================= DERECHA ================= -->
+        <section class="caracteristicas__panel caracteristicas__panel--crear">
+
+            <div class="panel panel--verde">
+
+                <div class="panel__header">
+                    <h3 class="panel__titulo">Agregar Característica</h3>
+                </div>
+
+                <div class="panel__contenido">
+
+                    <div class="formulario">
+
+                            <form method="POST" th:action="@{/presentation/admin/caracteristicas/crear}">
+
+                                <div class="formulario__grupo">
+                                    <label class="formulario__label">Nombre</label>
+                                    <input class="formulario__input" type="text" name="nombre">
+                                </div>
+
+                                <div class="formulario__grupo">
+                                    <label class="formulario__label">Padre</label>
+                                    <select class="formulario__input" name="idPadre">
+                                        <option value="">(sin padre)</option>
+
+                                        <option th:each="c : ${caracteristicas}"
+                                                th:value="${c.id}"
+                                                th:text="${c.nombre}">
+                                        </option>
+                                    </select>
+
+                                    <br><br>
+                                </div>
+
+
+                                <button class="formulario__boton" type="submit">Crear</button>
+                            </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+</main>
+
+<footer class="footer">
+
+    <div class="footer__info">
+        <strong>Bolsa de Empleo</strong><br>
+        Total Soft Inc.
+    </div>
+
+    <div class="footer__info">
+        Contacto: info@bolsaempleo.local<br>
+        Créditos: Equipo de desarrollo
+    </div>
+
+</footer>
+
+</body>
+</html>

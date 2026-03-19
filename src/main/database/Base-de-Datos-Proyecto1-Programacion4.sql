@@ -107,7 +107,7 @@ DROP TABLE IF EXISTS `proyecto1_programacion4`.`Caracteristica` ;
 
 CREATE TABLE IF NOT EXISTS `proyecto1_programacion4`.`Caracteristica` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `padre` INT NOT NULL,
+  `padre` INT NULL,
   `nombre` VARCHAR(45) NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_Caracteristica_Caracteristica1_idx` (`padre` ASC) VISIBLE,

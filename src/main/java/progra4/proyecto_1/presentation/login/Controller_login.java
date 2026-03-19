@@ -42,4 +42,6 @@ public class Controller_login {
         service.crearUsuario(usuario);
         return "redirect:/presentation/publico/principal";
     }
+
+
 }

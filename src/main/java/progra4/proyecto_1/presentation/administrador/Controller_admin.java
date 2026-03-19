@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import progra4.proyecto_1.logic.Caracteristica;
 import progra4.proyecto_1.logic.Empresa;
 import progra4.proyecto_1.logic.Oferente;
 import progra4.proyecto_1.logic.Service;
@@ -32,6 +33,30 @@ public class Controller_admin {
         model.addAttribute("oferentes", service.oferentesPendientes());
         return "presentation/admin/ViewOferentesPendientes";
     }
+    @GetMapping("/caracteristicas")
+    public String Caracteristicas(Model model){
+        model.addAttribute("caracteristicasRaiz", service.getCaracteristicasRaiz());
+        model.addAttribute("caracteristicas", service.findCaracteristicas());
+        return "presentation/admin/ViewCrearCaracteristicas";
+    }
+
+    @PostMapping("/caracteristicas/crear")
+    public String crearCaracteristicas(
+            @RequestParam String nombre,
+            @RequestParam(required = false) String idPadre) {
+
+        Integer padreId = null;
+
+        if (idPadre != null && !idPadre.isEmpty()) {
+            padreId = Integer.parseInt(idPadre);
+        }
+
+        service.crearCaracteristica(nombre, padreId);
+
+        return "redirect:/presentation/admin/caracteristicas";
+    }
+
+
 
     @PostMapping("/autorizarEmpresa/{id}")
     public String autorizarEmpresa(@PathVariable String id){
@@ -44,4 +69,8 @@ public class Controller_admin {
         service.autorizarOferente(id);
         return "redirect:/presentation/admin/oferentesPendientes";
     }
+
+
+
+
 }

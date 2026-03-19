@@ -184,4 +184,22 @@ public class Service {
     public Oferente getOferenteById(Integer id) {
         return oferentes.findById(String.valueOf(id)).orElseThrow();
     }
+
+    public void crearCaracteristica(String nombre, Integer padreId){
+        Caracteristica caracteristica = new Caracteristica();
+        caracteristica.setNombre(nombre);
+
+        if (padreId == null){
+            caracteristica.setPadre(null);
+            caracteristicas.save(caracteristica);
+        }
+        else{
+            Caracteristica padre = caracteristicas.findById(padreId).orElseThrow(() -> new RuntimeException("Padre no existe"));
+            caracteristica.setPadre(padre);
+            caracteristicas.save(caracteristica);
+        }
+    }
+    public List<Caracteristica> findCaracteristicas(){
+        return caracteristicas.findAll();
+    }
 }

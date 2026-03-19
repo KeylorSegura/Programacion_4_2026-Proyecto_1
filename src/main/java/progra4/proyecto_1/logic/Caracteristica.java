@@ -21,8 +21,8 @@ public class Caracteristica {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "padre", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "padre", nullable = true)
     private Caracteristica padre;
 
     @Column(name = "nombre", length = 45)

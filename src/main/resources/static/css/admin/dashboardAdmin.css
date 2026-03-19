@@ -1,0 +1,115 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-dashboard {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 24px;
+    background-color: #f5f7f9;
+}
+
+.admin-dashboard__container {
+    width: 100%;
+    max-width: 900px;
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    padding: 40px 32px;
+    text-align: center;
+}
+
+.admin-dashboard__title {
+    margin: 0 0 12px;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #1f2937;
+}
+
+.admin-dashboard__subtitle {
+    margin: 0 0 32px;
+    font-size: 1rem;
+    color: #4b5563;
+}
+
+.admin-dashboard__actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(220px, 1fr));
+    gap: 18px;
+}
+
+.admin-dashboard__link {
+    text-decoration: none;
+}
+
+.admin-dashboard__button {
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    background-color: #007bff;
+    color: #ffffff;
+    padding: 16px 18px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 10px rgba(31, 157, 99, 0.18);
+}
+
+.admin-dashboard__button:hover {
+    background-color: #0061ca;
+    transform: translateY(-2px);
+}
+
+.admin-dashboard__button:active {
+    transform: translateY(0);
+}
+
+.footer {
+    color: #ffffff;
+    padding: 18px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+    margin-top: 0;
+}
+
+.footer__info {
+    line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+    .admin-dashboard {
+        padding: 24px 14px;
+    }
+
+    .admin-dashboard__container {
+        padding: 28px 20px;
+    }
+
+    .admin-dashboard__title {
+        font-size: 1.8rem;
+    }
+
+    .admin-dashboard__actions {
+        grid-template-columns: 1fr;
+    }
+
+    .footer {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+}

@@ -1,40 +1,51 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Admin Dashboard</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/admin/dashboardAdmin.css}" type="text/css">
 </head>
 
 <body>
 <header th:replace="presentation/fragments/headerAdmin :: headerAdmin"></header>
 
-<h1>Administrador</h1>
-<p>Aprobaciones, catálogo de características y reportes.</p>
+<main class="admin-dashboard">
+    <div class="admin-dashboard__container">
 
-<a th:href="@{/presentation/admin/empresasPendientes}">
-    <button>Empresas pendientes</button>
-</a>
+        <h1 class="admin-dashboard__title">Administrador</h1>
+        <p class="admin-dashboard__subtitle">
+            Aprobaciones, catálogo de características y reportes.
+        </p>
 
-<a th:href="@{/presentation/admin/oferentesPendientes}">
-    <button>Oferentes pendientes</button>
-</a>
+        <div class="admin-dashboard__actions">
+            <a class="admin-dashboard__link" th:href="@{/presentation/admin/empresasPendientes}">
+                <button class="admin-dashboard__button" type="button">Empresas pendientes</button>
+            </a>
 
-<a>
-    <button>Características</button>
-</a>
+            <a class="admin-dashboard__link" th:href="@{/presentation/admin/oferentesPendientes}">
+                <button class="admin-dashboard__button" type="button">Oferentes pendientes</button>
+            </a>
 
-<a>
-    <button>Reportes</button>
-</a>
+            <a class="admin-dashboard__link" th:href="@{/presentation/admin/caracteristicas}">
+                <button class="admin-dashboard__button" type="button">Características</button>
+            </a>
 
-<footer>
+            <a class="admin-dashboard__link" href="#">
+                <button class="admin-dashboard__button" type="button">Reportes</button>
+            </a>
+        </div>
 
-    <div>
+    </div>
+</main>
+
+<footer class="footer">
+    <div class="footer__info">
         <strong>Bolsa de Empleo</strong><br>
         Total Soft Inc.
     </div>
 
-    <div>
+    <div class="footer__info">
         Contacto: info@bolsaempleo.local<br>
         Créditos: Equipo de desarrollo
     </div>
