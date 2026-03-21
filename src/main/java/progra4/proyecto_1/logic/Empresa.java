@@ -45,6 +45,6 @@ public class Empresa {
     @Column(name = "estado")
     private Byte estado;
 
-    @OneToMany(mappedBy = "empresa")
+    @OneToMany(mappedBy = "empresa", fetch = FetchType.EAGER)
     private Set<Puesto> puestos = new LinkedHashSet<>();
 }

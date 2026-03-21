@@ -4,48 +4,55 @@
     <meta charset="UTF-8">
     <title>Empresa - Nuevo puesto</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/caracteristicaTree.css}" type="text/css">
     <link rel="stylesheet" th:href="@{/css/empresa/nuevoPuesto.css}" type="text/css">
 </head>
 <body>
 <header th:replace="presentation/fragments/header :: header"></header>
 
-<main class="content">
+<main class="content puesto-form">
 
-    <h1>Crear Puesto</h1>
+    <h1 class="puesto-form__title">Crear Puesto</h1>
 
-    <form method="POST" name="puesto" th:action="@{/presentation/empresa/puesto/registrar}" th:object="${puesto}">
+    <form class="puesto-form__form" method="POST" name="puesto" th:action="@{/presentation/empresa/puesto/registrar}"
+          th:object="${puesto}">
 
-        <label>Descripcion</label>
-        <input type="text" th:field="*{descripcion}">
-
-        <label>Salario</label>
-        <input type="text" th:field="*{salario}">
-
-        <label>Tipo de Publicación</label>
-        <select th:field="*{tipoPublicacion}">
-            <option value="Publica" selected>Publica</option>
-            <option value="Privada">Privada</option>
-        </select>
-
-        <br><br>
-
-        <h3>Características requeridas</h3>
-        <div th:each="raiz : ${caracteristicasRaiz}">
-            <div th:replace="~{presentation/fragments/CaracteristicaTree :: arbol(${raiz})}"></div>
+        <div class="puesto-form__field">
+            <label class="puesto-form__label">Descripcion</label>
+            <input class="puesto-form__input" type="text" th:field="*{descripcion}">
         </div>
 
-        <br>
-        <button type="submit">Guardar Puesto</button>
+        <div class="puesto-form__field">
+            <label class="puesto-form__label">Salario</label>
+            <input class="puesto-form__input" type="text" th:field="*{salario}">
+        </div>
+
+        <div class="puesto-form__field">
+            <label class="puesto-form__label">Tipo de Publicación</label>
+            <select class="puesto-form__select" th:field="*{tipoPublicacion}">
+                <option value="Publica" selected>Publica</option>
+                <option value="Privada">Privada</option>
+            </select>
+        </div>
+
+        <div class="puesto-form__caracteristicas">
+            <h3 class="puesto-form__caracteristicas-title">Características requeridas</h3>
+            <div th:each="raiz : ${caracteristicasRaiz}">
+                <div th:replace="~{presentation/fragments/CaracteristicaTree :: arbol(${raiz})}"></div>
+            </div>
+        </div>
+
+        <button class="puesto-form__submit" type="submit">Guardar Puesto</button>
     </form>
 
 </main>
 
-<footer>
-    <div>
+<footer class="footer">
+    <div class="footer__brand">
         <strong>Bolsa de Empleo</strong><br>
         Total Soft Inc.
     </div>
-    <div>
+    <div class="footer__contact">
         Contacto: info@bolsaempleo.local<br>
         Créditos: Equipo de desarrollo
     </div>

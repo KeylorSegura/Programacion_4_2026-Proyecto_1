@@ -129,6 +129,11 @@ public class Service {
         puestos.save(p);
     }
 
+    public List<Puesto> getPuestosByEmpresa(Empresa empresa) {
+        if (empresa == null) return List.of();
+        return puestos.findByEmpresa(empresa);
+    }
+
     public Puesto getPuestoById(Integer id) {
         return puestos.findById(id).orElseThrow();
     }
@@ -186,21 +191,21 @@ public class Service {
         return oferentes.findById(String.valueOf(id)).orElseThrow();
     }
 
-    public void crearCaracteristica(String nombre, Integer padreId){
+    public void crearCaracteristica(String nombre, Integer padreId) {
         Caracteristica caracteristica = new Caracteristica();
         caracteristica.setNombre(nombre);
 
-        if (padreId == null){
+        if (padreId == null) {
             caracteristica.setPadre(null);
             caracteristicas.save(caracteristica);
-        }
-        else{
+        } else {
             Caracteristica padre = caracteristicas.findById(padreId).orElseThrow(() -> new RuntimeException("Padre no existe"));
             caracteristica.setPadre(padre);
             caracteristicas.save(caracteristica);
         }
     }
-    public List<Caracteristica> findCaracteristicas(){
+
+    public List<Caracteristica> findCaracteristicas() {
         return caracteristicas.findAll();
     }
 

@@ -8,33 +8,35 @@
 <body>
 <header th:replace="presentation/fragments/headerEmpresa :: header"></header>
 
-<main>
-    <h1>Detalle del oferente</h1>
+<main class="candidato-detalle">
+    <h1 class="candidato-detalle__title">Detalle del oferente</h1>
 
-    <section>
-        <h2>Detalle de oferente</h2>
-        <h3><span th:text="${oferente.nombre+ ' ' +oferente.primerApellido}"></span></h3>
-        <ul>
-            <li>Identificación: <span th:text="${oferente.id}"></span></li>
-            <li>Email: <span th:text="${oferente.correoElectronico}"></span></li>
-            <li>Teléfono: <span th:text="${oferente.telefono}"></span></li>
-            <li>Residencia: <span th:text="${oferente.lugarResidencia}"></span></li>
+    <section class="candidato-detalle__info">
+        <h2 class="candidato-detalle__info-title">Detalle de oferente</h2>
+        <h3 class="candidato-detalle__name">
+            <span th:text="${oferente.nombre+ ' ' +oferente.primerApellido}"></span>
+        </h3>
+        <ul class="candidato-detalle__list">
+            <li class="candidato-detalle__list-item">Identificación: <span th:text="${oferente.id}"></span></li>
+            <li class="candidato-detalle__list-item">Email: <span th:text="${oferente.correoElectronico}"></span></li>
+            <li class="candidato-detalle__list-item">Teléfono: <span th:text="${oferente.telefono}"></span></li>
+            <li class="candidato-detalle__list-item">Residencia: <span th:text="${oferente.lugarResidencia}"></span></li>
         </ul>
     </section>
 
-    <section>
-        <h3>Habilidades</h3>
-        <table>
-            <thead>
-            <tr>
-                <th>Caracteristica</th>
-                <th>Nivel</th>
+    <section class="candidato-detalle__habilidades">
+        <h3 class="candidato-detalle__habilidades-title">Habilidades</h3>
+        <table class="candidato-detalle__table">
+            <thead class="candidato-detalle__table-head">
+            <tr class="candidato-detalle__row candidato-detalle__row--header">
+                <th class="candidato-detalle__cell candidato-detalle__cell--header">Caracteristica</th>
+                <th class="candidato-detalle__cell candidato-detalle__cell--header">Nivel</th>
             </tr>
             </thead>
-            <tbody>
-            <tr th:each="oc : ${oferente.oferentecaracteristicas}">
-                <td th:text="${oc.caracteristica.nombre}"></td>
-                <td th:text="${oc.nivel}"></td>
+            <tbody class="candidato-detalle__table-body">
+            <tr class="candidato-detalle__row" th:each="oc : ${oferente.oferentecaracteristicas}">
+                <td class="candidato-detalle__cell" th:text="${oc.caracteristica.nombre}"></td>
+                <td class="candidato-detalle__cell candidato-detalle__cell--nivel" th:text="${oc.nivel}"></td>
             </tr>
             </tbody>
         </table>

@@ -1,0 +1,146 @@
+.mis-puestos {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.mis-puestos__header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.mis-puestos__title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+/* Botón Publicar puesto */
+.mis-puestos__new-btn {
+    background-color: #0d6efd;
+    border: none;
+    border-radius: 6px;
+    padding: 0;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.mis-puestos__new-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(13, 110, 253, 0.4);
+}
+
+.mis-puestos__new-btn:active {
+    transform: scale(0.96);
+    box-shadow: none;
+}
+
+.mis-puestos__new-link {
+    display: block;
+    padding: 0.45rem 1rem;
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.95rem;
+}
+
+/* Mensaje vacío */
+.mis-puestos__empty {
+    text-align: center;
+    color: #6c757d;
+    padding: 2rem 0;
+}
+
+/* Tabla */
+.mis-puestos__table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.mis-puestos__cell--header {
+    font-weight: 600;
+    background-color: #f8f9fa;
+    padding: 0.75rem 1rem;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.mis-puestos__cell {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #dee2e6;
+    vertical-align: middle;
+}
+
+.mis-puestos__row:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+/* Badge estado */
+.mis-puestos__cell--estado {
+    font-weight: 600;
+    color: #198754;
+}
+
+/* Acciones */
+.mis-puestos__cell--acciones {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.mis-puestos__toggle-form {
+    margin: 0;
+}
+
+/* Botones generales */
+.mis-puestos__btn {
+    border-radius: 6px;
+    padding: 0.4rem 0.85rem;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.mis-puestos__btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.mis-puestos__btn:active {
+    transform: scale(0.96);
+    box-shadow: none;
+}
+
+/* Botón Desactivar / Activar */
+.mis-puestos__btn--toggle {
+    background-color: #fff;
+    color: #dc3545;
+    border: 1px solid #dc3545;
+}
+
+.mis-puestos__btn--toggle:hover {
+    background-color: #dc3545;
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(220, 53, 69, 0.35);
+}
+
+/* Botón Mostrar Candidatos */
+.mis-puestos__btn--candidatos {
+    background-color: #0d6efd;
+    border: none;
+    padding: 0;
+}
+
+.mis-puestos__btn--candidatos:hover {
+    box-shadow: 0 4px 10px rgba(13, 110, 253, 0.4);
+}
+
+.mis-puestos__btn-link {
+    display: block;
+    padding: 0.4rem 0.85rem;
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.875rem;
+}

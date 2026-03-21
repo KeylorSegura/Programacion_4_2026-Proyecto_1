@@ -1,0 +1,89 @@
+/* ===== CANDIDATOS ===== */
+
+.candidatos {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.candidatos__title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.candidatos__puesto {
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: #6c757d;
+    margin-bottom: 1.5rem;
+}
+
+.candidatos__puesto-nombre {
+    font-weight: 600;
+    color: #343a40;
+}
+
+/* Tabla */
+.candidatos__table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.candidatos__cell--header {
+    font-weight: 600;
+    background-color: #f8f9fa;
+    padding: 0.75rem 1rem;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.candidatos__cell {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #dee2e6;
+    vertical-align: middle;
+}
+
+.candidatos__row:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+/* Porcentaje con color según valor (se puede extender con JS si se quiere dinámico) */
+.candidatos__cell--porcentaje {
+    font-weight: 600;
+    color: #198754;
+}
+
+/* Acciones */
+.candidatos__cell--accion {
+    vertical-align: middle;
+}
+
+/* Botón Ver detalles */
+.candidatos__btn {
+    background-color: #0d6efd;
+    border: none;
+    border-radius: 6px;
+    padding: 0;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.candidatos__btn:hover {
+    background-color: #0b5ed7;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(13, 110, 253, 0.4);
+}
+
+.candidatos__btn:active {
+    transform: scale(0.96);
+    box-shadow: none;
+}
+
+.candidatos__btn-link {
+    display: block;
+    padding: 0.4rem 0.85rem;
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.875rem;
+}

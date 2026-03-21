@@ -1,19 +1,12 @@
-/* ===== PUESTO FORM ===== */
+/* ===== EMPRESA REGISTRO ===== */
 
-.puesto-form {
-    max-width: 700px;
+.empresa-registro {
+    max-width: 600px;
     margin: 2rem auto;
     padding: 0 1rem;
 }
 
-.puesto-form__title {
-    font-size: 1.8rem;
-    font-weight: 700;
-    margin-bottom: 1.5rem;
-    text-align: center;
-}
-
-.puesto-form__form {
+.empresa-registro__container {
     background-color: #fff;
     border: 1px solid #dee2e6;
     border-radius: 10px;
@@ -21,22 +14,29 @@
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
 }
 
+.empresa-registro__title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
 /* Campos */
-.puesto-form__field {
+.empresa-registro__field {
     display: flex;
     flex-direction: column;
     margin-bottom: 1.25rem;
 }
 
-.puesto-form__label {
+.empresa-registro__label {
     font-weight: 600;
     font-size: 0.9rem;
     margin-bottom: 0.4rem;
     color: #343a40;
 }
 
-.puesto-form__input,
-.puesto-form__select {
+.empresa-registro__input,
+.empresa-registro__textarea {
     padding: 0.5rem 0.75rem;
     font-size: 0.95rem;
     border: 1px solid #ced4da;
@@ -44,28 +44,22 @@
     outline: none;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
     background-color: #fff;
+    font-family: inherit;
 }
 
-.puesto-form__input:focus,
-.puesto-form__select:focus {
+.empresa-registro__input:focus,
+.empresa-registro__textarea:focus {
     border-color: #0d6efd;
     box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.15);
 }
 
-/* Contenedor características - solo espaciado, sin estilos al árbol */
-.puesto-form__caracteristicas {
-    margin-bottom: 1.5rem;
-}
-
-.puesto-form__caracteristicas-title {
-    font-size: 1rem;
-    font-weight: 600;
-    margin-bottom: 0.75rem;
-    color: #343a40;
+.empresa-registro__textarea {
+    resize: none;
+    min-height: 100px;
 }
 
 /* Botón submit */
-.puesto-form__submit {
+.empresa-registro__submit {
     display: block;
     width: 100%;
     padding: 0.6rem 1rem;
@@ -76,16 +70,17 @@
     border: none;
     border-radius: 6px;
     cursor: pointer;
+    margin-top: 0.5rem;
     transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }
 
-.puesto-form__submit:hover {
+.empresa-registro__submit:hover {
     background-color: #0b5ed7;
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(13, 110, 253, 0.4);
 }
 
-.puesto-form__submit:active {
+.empresa-registro__submit:active {
     transform: scale(0.97);
     box-shadow: none;
 }
