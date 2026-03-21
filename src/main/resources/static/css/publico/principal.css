@@ -1,0 +1,108 @@
+.page__main {
+    display: flex;
+    justify-content: center;
+}
+
+.page__container {
+    padding: 40px 60px;
+    width: 100%;
+}
+
+.page__title {
+    margin-bottom: 10px;
+}
+
+.page__subtitle {
+    color: gray;
+}
+
+.page__empty {
+    margin-top: 20px;
+    color: #666;
+}
+
+/* BLOQUE jobs */
+.jobs {
+    margin-top: 25px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    gap: 25px;
+}
+
+/* BLOQUE card */
+.card {
+    background: #e8f2e6;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #cfdacb;
+    position: relative;
+}
+
+.card__title {
+    margin-bottom: 10px;
+}
+
+.card__description {
+    margin-bottom: 10px;
+}
+
+.card__salary {
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+/* DETALLE (BEM puro) */
+.card__details-toggle {
+    position: relative;
+    width: 100%;
+}
+
+.card__button {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #3b82f6;
+    background: #e8f2e6;
+    color: #3b82f6;
+    cursor: pointer;
+}
+
+/* oculto por defecto */
+.card__details {
+    display: none;
+    position: absolute;
+    width: 100%;
+    background: white;
+    box-sizing: border-box;
+    border: 1px solid #3b82f6;
+    border-radius: 0 0 8px 8px;
+    padding: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+}
+
+/* interacción */
+.card__details-toggle:hover .card__details {
+    display: block;
+}
+
+.card__details-toggle:hover .card__button {
+    background-color: #3b82f6;
+    color: white;
+    border-radius: 6px 6px 0 0;
+}
+
+/* lista interna */
+.card__list {
+    margin-top: 10px;
+    padding-left: 20px;
+}
+
+.card__list-item {
+    margin-bottom: 5px;
+}
+
+.card__skill {
+    font-weight: 500;
+}
+

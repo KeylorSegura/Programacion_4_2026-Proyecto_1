@@ -4,53 +4,65 @@
   <meta charset="UTF-8">
   <title>Bolsa de Empleo</title>
   <link rel="stylesheet" th:href="@{/css/styles.css}" type="text/css">
+  <link rel="stylesheet" th:href="@{/css/publico/principal.css}" type="text/css">
 </head>
-<body>
+<body class="page">
+
 <header th:replace="presentation/fragments/header :: header"></header>
 <header th:replace="presentation/fragments/headerAdmin :: header"></header>
 <header th:replace="presentation/fragments/headerEmpresa :: header"></header>
-  <div class="container">
-    <h1>Bolsa de Empleo</h1>
-    <p class="subtitulo">Últimos 5 puestos públicos</p>
-    <p th:if="${#lists.isEmpty(puestos)}">
+
+<main class="page__main">
+  <div class="container page__container">
+
+    <h1 class="page__title">Bolsa de Empleo</h1>
+    <p class="page__subtitle">Últimos 5 puestos públicos</p>
+
+    <p class="page__empty" th:if="${#lists.isEmpty(puestos)}">
       No hay puestos disponibles.
     </p>
+
     <div class="jobs" th:unless="${#lists.isEmpty(puestos)}">
-      <div class="card" th:each="p : ${puestos}">
-        <h3 th:text="${p.empresa.nombre}"></h3>
-        <p th:text="${p.descripcion}"></p>
-        <p class="salario"
+
+      <div class="jobs__card card" th:each="p : ${puestos}">
+
+        <h3 class="card__title" th:text="${p.empresa.nombre}"></h3>
+
+        <p class="card__description" th:text="${p.descripcion}"></p>
+
+        <p class="card__salary"
            th:text="'₡ ' + ${#numbers.formatDecimal(p.salario,1,'POINT',2,'COMMA')}">
         </p>
-        <div class ="detalleDespliegue">
-          <button class="detalleBtn">
+
+        <div class="card__details-toggle detalleDespliegue">
+
+          <button class="card__button detalleBtn">
             Ver detalle
           </button>
-          <div class="detalle">
-            <strong th:text="${p.descripcion}"></strong>
 
-            <ul>
-              <li th:each="pc : ${p.puestocaracteristicas}">
-                <span th:text="${pc.caracteristica.nombre}"></span>
+          <div class="card__details detalle">
+
+            <strong class="card__details-title" th:text="${p.descripcion}"></strong>
+
+            <ul class="card__list">
+              <li class="card__list-item" th:each="pc : ${p.puestocaracteristicas}">
+                <span class="card__skill" th:text="${pc.caracteristica.nombre}"></span>
                 -
                 Nivel:
-                <span th:text="${pc.nivel}"></span>
+                <span class="card__level" th:text="${pc.nivel}"></span>
               </li>
             </ul>
+
           </div>
         </div>
+
       </div>
+
     </div>
   </div>
-  <footer>
-    <div>
-      <strong>Bolsa de Empleo</strong><br>
-      Total Soft Inc.
-    </div>
-    <div>
-      Contacto: info@bolsaempleo.local<br>
-      Créditos: Equipo de desarrollo
-    </div>
-  </footer>
+</main>
+
+<footer class="page__footer" th:replace="presentation/fragments/Footer :: footer"></footer>
+
 </body>
 </html>

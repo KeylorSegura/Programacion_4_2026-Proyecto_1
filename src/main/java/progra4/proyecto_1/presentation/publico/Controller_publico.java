@@ -7,6 +7,10 @@ import org.springframework.ui.Model;
 import progra4.proyecto_1.logic.Puesto;
 import progra4.proyecto_1.logic.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 @Controller
 @RequestMapping("/presentation/publico")
 public class Controller_publico {
@@ -22,19 +26,46 @@ public class Controller_publico {
         return "presentation/publico/ViewPrincipal";
     }
 
-    @GetMapping("/show")
-    public String show(Model model) {
-
-        model.addAttribute("puesto", new Puesto());
-
-        return "presentation/publico/Pruebaaa";
+    @GetMapping("/puestos")
+    public String verPuestos(Model model) {
+        model.addAttribute("caracteristicasRaiz", service.getCaracteristicasRaiz());
+        return "presentation/publico/ViewBuscarPuestos";
     }
 
-//    @PostMapping("/create")
-//    public String create(@ModelAttribute Puesto puesto) {
+
+//    @GetMapping("/show")
+//    public String show(Model model) {
 //
-//        service.agregarPuesto(puesto);
+//        model.addAttribute("puesto", new Puesto());
 //
-//        return "redirect:/presentation/publico/principal";
+//        return "presentation/publico/Pruebaaa";
 //    }
+
+    @PostMapping("/filtrar")
+    public String filtrar(
+            @RequestParam(required = false) List<Integer> caracteristicaIds,
+            @RequestParam String accion,
+            Model model
+    ) {
+        if ("limpiar".equals(accion)) {
+            model.addAttribute("puestos", new ArrayList<>());
+            model.addAttribute("caracteristicasRaiz", service.getCaracteristicasRaiz());
+            return "presentation/publico/ViewBuscarPuestos";
+        }
+        if ("filtrar".equals(accion)) {
+
+            if (caracteristicaIds == null || caracteristicaIds.isEmpty()) {
+                model.addAttribute("puestos", new ArrayList<>());
+            } else {
+                List<Puesto> puestos = service.buscarPorCaracteristicas(caracteristicaIds);
+                model.addAttribute("puestos", puestos);
+            }
+
+            model.addAttribute("caracteristicasRaiz", service.getCaracteristicasRaiz());
+            return "presentation/publico/ViewBuscarPuestos";
+        }
+        return "presentation/publico/ViewPrincipal";
+    }
+
+
 }

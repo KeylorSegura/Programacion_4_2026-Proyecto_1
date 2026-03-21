@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Buscar Puestos</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" type="text/css">
+</head>
+<body>
+<header th:replace="presentation/fragments/header :: header"></header>
+
+<main>
+    <div class="page__container">
+        <h1>Busqueda de puestos</h1>
+            <div class="page__filtrador">
+                <form method="post" th:action="@{/presentation/publico/filtrar}">
+                    <h3>Filtrar por caracteristica</h3>
+                    <div th:each="raiz : ${caracteristicasRaiz}">
+                        <div th:replace="~{presentation/fragments/CaracteristicaTree :: arbol(${raiz})}"></div>
+                    </div>
+                    <div class="page_filtrador__botones">
+                        <button type="submit" name="accion" value="filtrar">Filtrar</button>
+                        <button type="submit" name="accion" value="limpiar">Limpiar</button>
+                    </div>
+                </form>
+            </div>
+        <h2>Resultados</h2>
+        <div class="page__resultados">
+            <div th:if="${puestos == null or puestos.isEmpty()}">
+                <p>No hay resultados</p>
+            </div>
+
+            <div th:each="puesto : ${puestos}">
+                <div class="puesto">
+                    <p><strong>Descripción:</strong> <span th:text="${puesto.descripcion}"></span></p>
+                    <p><strong>Salario:</strong> <span th:text="${puesto.salario}"></span></p>
+                    <p><strong>Tipo:</strong> <span th:text="${puesto.tipoPublicacion}"></span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer class="page__footer" th:replace="presentation/fragments/Footer :: footer"></footer>
+</body>
+</html>

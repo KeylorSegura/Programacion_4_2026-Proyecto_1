@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import progra4.proyecto_1.data.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -201,5 +202,21 @@ public class Service {
     }
     public List<Caracteristica> findCaracteristicas(){
         return caracteristicas.findAll();
+    }
+
+
+    public List<Puesto> buscarPorCaracteristicas(List<Integer> caracteristicaIds) {
+        if (caracteristicaIds == null || caracteristicaIds.isEmpty()) {
+            return new ArrayList<>();
+        }
+
+        List<Puesto> todosPuestos = puestos.findAll();
+
+        return todosPuestos.stream()
+                .filter(p -> p.getPuestocaracteristicas().stream()
+                        .anyMatch(pc -> caracteristicaIds.contains(pc.getCaracteristica().getId()))
+                )
+                .distinct()
+                .toList();
     }
 }
