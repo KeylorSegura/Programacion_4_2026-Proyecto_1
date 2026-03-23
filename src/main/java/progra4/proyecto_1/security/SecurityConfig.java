@@ -24,13 +24,19 @@ public class SecurityConfig {
                                 "/presentation/publico/puestos",
                                 "/presentation/publico/filtrar",
                                 "/css/**",
-                                "/images/**"
+                                "/images/**",
+                                "/presentation/empresa/registrar"
                         ).permitAll()
                         .requestMatchers(
                                 "/presentation/admin/**"
                         ).hasAuthority("Administrador")
                         .requestMatchers(
-                                "/presentation/empresa/**"
+                                "/presentation/empresa",
+                                "/presentation/empresa/dashboard",
+                                "/presentation/empresa/puesto/registrar",
+                                "/presentation/empresa/puesto/toggle-activo/**",
+                                "/presentation/empresa/puestos",
+                                "/presentation/empresa/candidatos/**"
                         ).hasAuthority("Empresa")
                         .anyRequest().authenticated()
                 )
