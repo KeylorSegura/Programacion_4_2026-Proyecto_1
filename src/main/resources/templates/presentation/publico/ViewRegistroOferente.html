@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registrar Oferente</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" type="text/css">
+</head>
+
+<body>
+<header th:replace="presentation/fragments/header :: header"></header>
+<main>
+    <div class ="page__container">
+        <h1>Registrar Oferente</h1>
+        <form method="POST" th:object="${oferente}" th:action="@{/presentation/oferente/registrar}">
+            <div class ="page__usuario">
+                <h3>Datos de usuario</h3>
+
+                <label>Nombre del usuario</label>
+                <input type="text" name="nombreUsuario" required>
+
+                <label>Clave</label>
+                <input type="password" name="clave" required>
+            </div>
+
+            <div class ="page__oferente">
+                <h3>Datos de la oferente</h3>
+
+                <label>Nombre del oferente</label>
+                <input type="text" th:field="*{nombre}" required>
+
+                <label>Primer apellido</label>
+                <input type="text" th:field="*{primerApellido}" required>
+
+                <label>Nacionalidad</label>
+                <input type="text" th:field="*{primerApellido}" required>
+
+                <label>Teléfono</label>
+                <input type="text" th:field="*{telefono}" required>
+
+                <label>Correo electrónico</label>
+                <input type="email" th:field="*{correoElectronico}" required>
+
+                <label>Lugar de residencia</label>
+                <input type="text" th:field="*{lugarResidencia}" required>
+            </div>
+
+            <button type="submit">Guardar Oferente</button>
+
+        </form>
+
+
+    </div>
+</main>
+
+<footer class="page__footer" th:replace="presentation/fragments/Footer :: footer"></footer>
+</body>
+
+</html>

@@ -219,4 +219,16 @@ public class Service {
                 .distinct()
                 .toList();
     }
+
+    public void agregarOferente(Oferente oferente, String idUsuario, String clave) {
+        if (usuarios.existsById(idUsuario)) {
+            throw new IllegalArgumentException("El nombre de usuario ya existe");
+        }
+
+        Usuario usuario = new Usuario(idUsuario, clave, "Oferente");
+        usuarios.save(usuario);
+
+        oferente.setNombreUsuario(usuario);
+        oferentes.save(oferente);
+    }
 }

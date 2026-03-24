@@ -25,7 +25,8 @@ public class SecurityConfig {
                                 "/presentation/publico/filtrar",
                                 "/css/**",
                                 "/images/**",
-                                "/presentation/empresa/registrar"
+                                "/presentation/empresa/registrar",
+                                "/presentation/oferente/registrar"
                         ).permitAll()
                         .requestMatchers(
                                 "/presentation/admin/**"
