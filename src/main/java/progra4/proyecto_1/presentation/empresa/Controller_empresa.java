@@ -22,7 +22,7 @@ public class Controller_empresa {
     @GetMapping("/registrar")
     public String registrar(Model model) {
         model.addAttribute("empresa", new Empresa());
-        return "presentation/empresa/ViewRegistroEmpresa";
+        return "presentation/publico/ViewRegistroEmpresa";
     }
 
     @PostMapping("/registrar")

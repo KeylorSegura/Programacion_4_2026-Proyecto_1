@@ -8,7 +8,8 @@
 </head>
 
 <body>
-<header th:replace="presentation/fragments/headerAdmin :: headerAdmin"></header>
+<!--<header th:replace="presentation/fragments/headerAdmin :: headerAdmin"></header>-->
+<header th:replace="presentation/fragments/header :: header"></header>
 
 <main class="admin-dashboard">
     <div class="admin-dashboard__container">
@@ -19,11 +20,11 @@
         </p>
 
         <div class="admin-dashboard__actions">
-            <a class="admin-dashboard__link" th:href="@{/presentation/admin/empresasPendientes}">
+            <a class="admin-dashboard__link" th:href="@{/presentation/admin/empresas-pendientes}">
                 <button class="admin-dashboard__button" type="button">Empresas pendientes</button>
             </a>
 
-            <a class="admin-dashboard__link" th:href="@{/presentation/admin/oferentesPendientes}">
+            <a class="admin-dashboard__link" th:href="@{/presentation/admin/oferentes-pendientes}">
                 <button class="admin-dashboard__button" type="button">Oferentes pendientes</button>
             </a>
 

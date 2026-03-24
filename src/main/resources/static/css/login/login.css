@@ -1,0 +1,159 @@
+/* ===== Reset básico ===== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* ===== Layout general ===== */
+html, body {
+    min-height: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(135deg, #f4f7fb, #e9eef5);
+    color: #1f2937;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ===== Main ===== */
+main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 1rem;
+}
+
+/* ===== Contenedor general del login ===== */
+.form-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-container h2 {
+    margin-bottom: 1.2rem;
+    font-size: 2rem;
+    color: #111827;
+    font-weight: 700;
+}
+
+/* ===== Caja del formulario ===== */
+.form {
+    background: #ffffff;
+    width: 100%;
+    max-width: 400px;
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.12);
+}
+
+.w25 {
+    width: 100%;
+    max-width: 400px;
+}
+
+/* ===== Título interno ===== */
+.section {
+    text-align: center;
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin-bottom: 1.4rem;
+    color: #1d4ed8;
+}
+
+/* ===== Espaciado de grupos ===== */
+.form form > div:not(.section) {
+    margin-bottom: 1rem;
+}
+
+/* ===== Labels ===== */
+.label {
+    margin-bottom: 0.45rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #374151;
+}
+
+/* ===== Inputs ===== */
+.field input {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    background: #f9fafb;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+    outline: none;
+}
+
+.field input:focus {
+    border-color: #2563eb;
+    background: #ffffff;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
+}
+
+/* ===== Botón ===== */
+.button {
+    width: 100%;
+    padding: 0.9rem 1rem;
+    border: none;
+    border-radius: 10px;
+    background: #2563eb;
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.button:hover {
+    background: #1d4ed8;
+}
+
+.button:active {
+    transform: scale(0.98);
+}
+
+/* ===== Footer ===== */
+footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: 1.25rem 2rem;
+    background: #111827;
+    color: #f9fafb;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+footer strong {
+    color: #ffffff;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+    main {
+        padding: 1.5rem 1rem;
+    }
+
+    .form-container h2 {
+        font-size: 1.6rem;
+        text-align: center;
+    }
+
+    .form {
+        padding: 1.5rem;
+    }
+
+    footer {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+    }
+}

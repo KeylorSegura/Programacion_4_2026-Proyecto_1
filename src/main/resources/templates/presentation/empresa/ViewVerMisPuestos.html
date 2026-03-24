@@ -4,49 +4,39 @@
     <meta charset="UTF-8">
     <title>Empresa - Mis puestos</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}" type="text/css">
-    <link rel="stylesheet" th:href="@{/css/empresa/verMisPuestos.css}" type="text/css">
 </head>
 <body>
-<header th:replace="~{presentation/fragments/headerEmpresa :: header}"></header>
-<main class="mis-puestos">
-    <div class="mis-puestos__header">
-        <h1 class="mis-puestos__title">Mis Puestos</h1>
-        <button class="mis-puestos__new-btn">
-            <a class="mis-puestos__new-link" href="/presentation/empresa/puesto/registrar">Publicar puesto</a>
-        </button>
-    </div>
+<header th:replace="presentation/fragments/header :: header"></header>
+<main>
+    <h1>Mis Puestos</h1>
+    <button>
+        <a href="/presentation/empresa/puesto/registrar">Publicar puesto</a>
+    </button>
 
-    <div class="mis-puestos__empty" th:if="${puestos == null or puestos.isEmpty()}">
-        <p>Aún no tenés puestos publicados.</p>
-    </div>
-
-    <table class="mis-puestos__table" th:unless="${puestos == null or puestos.isEmpty()}">
-        <thead class="mis-puestos__table-head">
-        <tr class="mis-puestos__row mis-puestos__row--header">
-            <th class="mis-puestos__cell mis-puestos__cell--header">ID</th>
-            <th class="mis-puestos__cell mis-puestos__cell--header">Descripción</th>
-            <th class="mis-puestos__cell mis-puestos__cell--header">Salario</th>
-            <th class="mis-puestos__cell mis-puestos__cell--header">Estado</th>
-            <th class="mis-puestos__cell mis-puestos__cell--header">Acciones</th>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Descripción</th>
+            <th>Salario</th>
+            <th>Estado</th>
+            <th>Acciones</th>
         </tr>
         </thead>
-        <tbody class="mis-puestos__table-body">
-        <tr th:each="puesto : ${puestos}" class="mis-puestos__row">
-            <td class="mis-puestos__cell" th:text="${puesto.id}"></td>
-            <td class="mis-puestos__cell" th:text="${puesto.descripcion}"></td>
-            <td class="mis-puestos__cell" th:text="${puesto.salario}"></td>
-            <td class="mis-puestos__cell mis-puestos__cell--estado"
-                th:text="${puesto.activo != null and puesto.activo.intValue() == 1} ? 'Activo' : 'Inactivo'"></td>
-            <td class="mis-puestos__cell mis-puestos__cell--acciones">
-                <form class="mis-puestos__toggle-form" method="post"
-                      th:action="@{/presentation/empresa/puesto/toggle-activo/{id}(id=${puesto.id})}">
-                    <button class="mis-puestos__btn mis-puestos__btn--toggle" type="submit"
-                            th:text="${puesto.activo != null and puesto.activo.intValue() == 1} ? 'Desactivar' : 'Activar'">
+        <tbody>
+        <tr th:each="puesto : ${empresa.puestos}">
+            <td th:text="${puesto.id}"></td>
+            <td th:text="${puesto.descripcion}"></td>
+            <td th:text="${puesto.salario}"></td>
+            <td th:text="${puesto.activo == 1} ? 'Activo' : 'Inactivo'"></td>
+            <td>
+                <form th:action="@{/presentation/empresa/puesto/toggle-activo/{id}(id=${puesto.id})}" method="post">
+                    <button type="submit"
+                            th:text="${puesto.activo == 1} ? 'Desactivar' : 'Activar'">
                     </button>
                 </form>
-                <button class="mis-puestos__btn mis-puestos__btn--candidatos">
-                    <a class="mis-puestos__btn-link"
-                       th:href="@{/presentation/empresa/candidatos/puesto(id=${puesto.id})}">Mostrar Candidatos</a>
+                <button>
+                    <a th:href="@{/presentation/empresa/candidatos/puesto(id=${puesto.id})}">Mostrar Candidatos</a>
                 </button>
             </td>
         </tr>

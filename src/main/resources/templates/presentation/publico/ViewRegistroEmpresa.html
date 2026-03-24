@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registrar Empresa</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" type="text/css">
+</head>
+
+<body>
+<header th:replace="presentation/fragments/header :: header"></header>
+<main>
+    <div class ="page__container">
+        <h1>Registrar Empresa</h1>
+        <form method="POST" th:object="${empresa}" th:action="@{/presentation/empresa/registrar}">
+            <div class ="page__usuario">
+                <h3>Datos de usuario</h3>
+
+                <label>Nombre del usuario</label>
+                <input type="text" name="nombreUsuario" required>
+
+                <label>Clave</label>
+                <input type="password" name="clave" required>
+            </div>
+
+            <div class ="page__empresa">
+                <h3>Datos de la empresa</h3>
+
+                <label>Nombre de la empresa</label>
+                <input type="text" th:field="*{nombre}" required>
+
+                <label>Localización</label>
+                <input type="text" th:field="*{localizacion}" required>
+
+                <label>Correo electrónico</label>
+                <input type="email" th:field="*{correoElectronico}" required>
+
+                <label>Teléfono</label>
+                <input type="text" th:field="*{telefono}" required>
+
+                <label>Descripción</label>
+                <textarea th:field="*{descripcion}" required></textarea>
+            </div>
+
+            <button type="submit">Guardar Empresa</button>
+
+        </form>
+
+
+    </div>
+</main>
+
+<footer class="page__footer" th:replace="presentation/fragments/Footer :: footer"></footer>
+</body>
+
+</html>

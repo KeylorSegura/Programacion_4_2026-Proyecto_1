@@ -22,13 +22,13 @@ public class Controller_admin {
         return "presentation/admin/ViewDashboard";
     }
 
-    @GetMapping("/empresasPendientes")
+    @GetMapping("/empresas-pendientes")
     public String empresasPendientes(Model model){
         model.addAttribute("empresas", service.empresasPendientes());
         return "presentation/admin/ViewEmpresasPendientes";
     }
 
-    @GetMapping("/oferentesPendientes")
+    @GetMapping("/oferentes-pendientes")
     public String oferentesPendientes(Model model){
         model.addAttribute("oferentes", service.oferentesPendientes());
         return "presentation/admin/ViewOferentesPendientes";
@@ -61,13 +61,13 @@ public class Controller_admin {
     @PostMapping("/autorizarEmpresa/{id}")
     public String autorizarEmpresa(@PathVariable String id){
         service.autorizarEmpresa(id);
-        return "redirect:/presentation/admin/empresasPendientes";
+        return "redirect:/presentation/admin/empresas-pendientes";
     }
 
     @PostMapping("/autorizarOferente/{id}")
     public String autorizarOferente(@PathVariable String id){
         service.autorizarOferente(id);
-        return "redirect:/presentation/admin/oferentesPendientes";
+        return "redirect:/presentation/admin/oferentes-pendientes";
     }
 
 

@@ -4,38 +4,31 @@
     <meta charset="UTF-8">
     <title>Empresa - Candidatos</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}" type="text/css">
-    <link rel="stylesheet" th:href="@{/css/empresa/mostrarCandidatos.css}" type="text/css">
 </head>
 <body>
-<header th:replace="presentation/fragments/headerEmpresa :: header"></header>
-<main class="candidatos">
-    <h1 class="candidatos__title">Candidatos para el puesto</h1>
+<header th:replace="presentation/fragments/header :: header"></header>
+<main>
+    <h1>Candidatos para el puesto</h1>
 
-    <h2 class="candidatos__puesto">Puesto: <span class="candidatos__puesto-nombre"
-                                                 th:text="${puesto.descripcion}"></span></h2>
+    <h2>Puesto: <span th:text="${puesto.descripcion}"></span></h2>
 
-    <table class="candidatos__table">
-        <thead class="candidatos__table-head">
-        <tr class="candidatos__row candidatos__row--header">
-            <th class="candidatos__cell candidatos__cell--header">Oferente</th>
-            <th class="candidatos__cell candidatos__cell--header">Requisitos cumplidos</th>
-            <th class="candidatos__cell candidatos__cell--header">% Coincidencia</th>
-            <th class="candidatos__cell candidatos__cell--header">Acción</th>
+    <table>
+        <thead>
+        <tr>
+            <th>Oferente</th>
+            <th>Requisitos cumplidos</th>
+            <th>% Coincidencia</th>
+            <th>Acción</th>
         </tr>
         </thead>
-        <tbody class="candidatos__table-body">
-        <tr class="candidatos__row" th:each="candidato : ${candidatos}">
-            <td class="candidatos__cell"
-                th:text="${candidato['oferente'].nombre + ' ' + candidato['oferente'].primerApellido}"></td>
-            <td class="candidatos__cell"
-                th:text="${candidato['requisitosCumplidos'] + '/' + candidato['totalRequisitos']}"></td>
-            <td class="candidatos__cell candidatos__cell--porcentaje"
-                th:text="${candidato['porcentajeCoincidencia'] + '%'}"></td>
-            <td class="candidatos__cell candidatos__cell--accion">
-                <button class="candidatos__btn" type="button">
-                    <a class="candidatos__btn-link"
-                       th:href="@{/presentation/empresa/candidatos/oferente(id=${candidato['oferente'].id})}">Ver
-                        detalles</a>
+        <tbody>
+        <tr th:each="candidato : ${candidatos}">
+            <td th:text="${candidato['oferente'].nombre + ' ' + candidato['oferente'].primerApellido}"></td>
+            <td th:text="${candidato['requisitosCumplidos'] + '/' + candidato['totalRequisitos']}"></td>
+            <td th:text="${candidato['porcentajeCoincidencia'] + '%'}"></td>
+            <td>
+                <button type="button">
+                    <a th:href="@{/presentation/empresa/candidatos/oferente(id=${candidato['oferente'].id})}">Ver detalles</a>
                 </button>
             </td>
         </tr>
