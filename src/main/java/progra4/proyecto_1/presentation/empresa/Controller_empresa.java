@@ -74,9 +74,8 @@ public class Controller_empresa {
     @GetMapping("/puestos")
     public String mispuestos(Model model) {
         Empresa empresa = service.getEmpresaPorUsuario("google");
-        List<Puesto> puestos = service.getPuestosByEmpresa(empresa);
         model.addAttribute("empresa", empresa);
-        model.addAttribute("puestos", puestos);
+        model.addAttribute("puestos", empresa.getPuestos());
         return "presentation/empresa/ViewVerMisPuestos";
     }
 

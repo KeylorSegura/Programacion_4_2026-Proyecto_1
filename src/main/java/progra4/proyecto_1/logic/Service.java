@@ -50,11 +50,6 @@ public class Service {
     }
 
     public List<Caracteristica> getCaracteristicasRaiz() {
-//        List<Caracteristica> todas = caracteristicas.findAll();
-//
-//        return todas.stream()
-//                .filter(c -> c.getPadre() != null && c.getPadre().getId().equals(c.getId()))
-//                .toList();
         return caracteristicas.findRoots();
     }
 
@@ -129,11 +124,6 @@ public class Service {
         puestos.save(p);
     }
 
-    public List<Puesto> getPuestosByEmpresa(Empresa empresa) {
-        if (empresa == null) return List.of();
-        return puestos.findByEmpresa(empresa);
-    }
-
     public Puesto getPuestoById(Integer id) {
         return puestos.findById(id).orElseThrow();
     }
@@ -151,8 +141,6 @@ public class Service {
                                             && oc.getNivel() >= req.getNivel()
                             )
                     ).count();
-
-
                     if (cumplidos == 0) return null;
 
                     int porcentaje = (int) (cumplidos * 100 / requisitos.size());
