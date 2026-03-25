@@ -6,12 +6,14 @@
     Fragmento recursivo para renderizar el árbol de características.
 -->
 <div class="caracteristica-nodo" th:fragment="arbol(nodo)">
-    <details class="caracteristica-nodo__detalle">
+    <details class="caracteristica-nodo__detalle"  th:open="${nodo.abierto}">
         <summary class="caracteristica-nodo__resumen">
-            <input class="caracteristica-nodo__checkbox" type="checkbox" name="caracteristicaIds" th:value="${nodo.id}">
+            <input class="caracteristica-nodo__checkbox" type="checkbox" name="caracteristicaIds" th:value="${nodo.id}"
+                   th:checked="${#lists.contains(caracteristicaIdsSeleccionadas, nodo.id)}">
             <span class="caracteristica-nodo__nombre" th:text="${nodo.nombre}"></span>
         </summary>
-        <div class="caracteristica-nodo__hijos" th:if="${nodo.caracteristicas != null and not nodo.caracteristicas.isEmpty()}">
+        <div class="caracteristica-nodo__hijos"
+             th:if="${nodo.caracteristicas != null and not nodo.caracteristicas.isEmpty()}">
             <th:block th:each="hijo : ${nodo.caracteristicas}">
                 <th:block th:if="${hijo.id != nodo.id}">
                     <div th:replace="~{presentation/fragments/CaracteristicaTreePublico :: arbol(${hijo})}"></div>

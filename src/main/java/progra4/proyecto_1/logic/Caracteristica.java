@@ -29,6 +29,17 @@ public class Caracteristica {
     private String nombre;
 
     @OneToMany(mappedBy = "padre")
+    @OrderBy("nombre ASC")
     private Set<Caracteristica> caracteristicas = new LinkedHashSet<>();
 
+
+    private boolean abierto;
+
+    public boolean isAbierto() {
+        return abierto;
+    }
+
+    public void setAbierto(boolean abierto) {
+        this.abierto = abierto;
+    }
 }

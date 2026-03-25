@@ -30,7 +30,7 @@ public class Service {
 
     public List<Puesto> ultimos5Puestos() {
         return puestos.findAll().stream()
-                .filter(p -> "PUBLICO".equalsIgnoreCase(p.getTipoPublicacion()))
+                .filter(p -> "Publica".equalsIgnoreCase(p.getTipoPublicacion()))
                 .sorted((p1, p2) -> Long.compare(p2.getId(), p1.getId()))
                 .limit(5)
                 .toList();
@@ -53,12 +53,20 @@ public class Service {
     }
 
     public List<Caracteristica> getCaracteristicasRaiz() {
-//        List<Caracteristica> todas = caracteristicas.findAll();
-//
-//        return todas.stream()
-//                .filter(c -> c.getPadre() != null && c.getPadre().getId().equals(c.getId()))
-//                .toList();
-        return caracteristicas.findRoots();
+        List<Caracteristica> raices = caracteristicas.findRoots();
+
+        ordenarRecursivo(raices);
+
+        return raices;
+    }
+
+    private void ordenarRecursivo(Collection<Caracteristica> nodos) {
+        if (nodos == null) return;
+        List<Caracteristica> lista = new ArrayList<>(nodos);
+        lista.sort(Comparator.comparing(Caracteristica::getNombre));
+        for (Caracteristica nodo : lista) {
+            ordenarRecursivo(nodo.getCaracteristicas());
+        }
     }
 
     public void eliminarTodosPuestos() {
@@ -235,7 +243,6 @@ public class Service {
         oferentes.save(oferente);
     }
 
-    //-----caracteristicas mapeo inverso
 
     public String construirRutaCaracteristica(Caracteristica c) {
         if (c.getPadre() == null) {
@@ -320,6 +327,39 @@ public class Service {
     public boolean existeCV(Usuario usuario){
         byte[] cv = obtenerCV(usuario);
         return (cv != null && cv.length > 0);
+    }
+
+
+    public void marcarArbolAbierto(List<Caracteristica> raices, List<Integer> seleccionados) {
+        for (Caracteristica raiz : raices) {
+            marcarNodo(raiz, seleccionados);
+        }
+    }
+
+    private boolean marcarNodo(Caracteristica nodo, List<Integer> seleccionados) {
+        boolean abierto = false;
+
+        if (nodo.getCaracteristicas() != null) {
+            for (Caracteristica hijo : nodo.getCaracteristicas()) {
+                boolean hijoAbierto = marcarNodo(hijo, seleccionados);
+                if (hijoAbierto) {
+                    abierto = true;
+                }
+            }
+        }
+
+        if (abierto) {
+            nodo.setAbierto(true);
+            return true;
+        }
+
+        if (seleccionados.contains(nodo.getId())) {
+            nodo.setAbierto(false);
+            return true;
+        }
+
+        nodo.setAbierto(false);
+        return false;
     }
 
 }
