@@ -6,10 +6,80 @@
     <link rel="stylesheet" th:href="@{/css/styles.css}" type="text/css">
 </head>
 <body>
-<header th:replace="presentation/fragments/headerOferente :: header"></header>
+<header th:replace="presentation/fragments/header :: header"></header>
 <main>
     <div class ="page__container">
         <h1>Mis Habilidades</h1>
+        <div class="left-panel">
+            <table>
+                <thead>
+                <tr>
+                    <th>Característica</th>
+                    <th>Nivel</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="h : ${habilidades}">
+                    <td th:text="${h.ruta}"></td>
+                    <td th:text="${h.nivel}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div  class="central-panel">
+            <h3>Ruta:</h3>
+
+            <div>
+                <a th:href="@{/presentation/oferente/habilidades(rutaIndex=0)}">Raíces</a>
+
+                <span th:each="c, iterStat : ${ruta}">
+                        /
+                        <a th:text="${c.nombre}"
+                           th:href="@{/presentation/oferente/habilidades(rutaIndex=${iterStat.index + 1})}">
+                        </a>
+                    </span>
+            </div>
+
+            <br>
+
+            <h4>Subcategorías</h4>
+
+            <table>
+                <tbody>
+                <tr th:each="c : ${caracteristicasActuales}">
+                    <td th:text="${c.nombre}"></td>
+                    <td>
+                        <a th:href="@{/presentation/oferente/habilidades(seleccion=${c.id})}">
+                            Entrar
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="central-panel">
+            <h3>Agregar Habilidad</h3>
+
+            <form th:action="@{/presentation/oferente/agregarHabilidad}" method="post">
+
+                <label>Característica</label><br>
+                <select name="caracteristicaId">
+                    <option th:each="c : ${caracteristicasActuales}"
+                            th:value="${c.id}"
+                            th:text="${c.nombre}">
+                    </option>
+                </select>
+
+                <br><br>
+
+                <label>Nivel (1-5)</label><br>
+                <input type="number" name="nivel" min="1" max="5" required>
+
+                <br><br>
+
+                <button type="submit">Agregar</button>
+            </form>
+        </div>
     </div>
 </main>
 <footer class="page__footer" th:replace="presentation/fragments/Footer :: footer"></footer>

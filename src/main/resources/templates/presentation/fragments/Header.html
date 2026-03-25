@@ -30,6 +30,13 @@
             <a class="navbar__nav-link" href="/presentation/empresa/puestos">Mis puestos</a>
             <a class="navbar__nav-link" href="/presentation/empresa/puesto/registrar">Publicar puesto</a>
         </th:block>
+
+        <!-- Opciones para Oferente -->
+        <th:block sec:authorize="isAuthenticated() and hasAuthority('Oferente')">
+            <a class="navbar__nav-link" href="/presentation/oferente/dashboard">Dashboard</a>
+            <a class="navbar__nav-link" href="/presentation/oferente/habilidades" >Mis habilidades</a>
+            <a class="navbar__nav-link" href="/presentation/oferente/cv">Mi CV</a>
+        </th:block>
     </nav>
 
     <div class="navbar__login">
