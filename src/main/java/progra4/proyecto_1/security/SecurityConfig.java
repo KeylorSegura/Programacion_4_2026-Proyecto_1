@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,8 +19,9 @@ public class SecurityConfig {
                 .authorizeHttpRequests(customizer -> customizer
                         .requestMatchers(
                                 "/",
+                                "/login",
+                                "/notAuthorized",
                                 "/presentation/publico",
-                                "/presentation/login/form",
                                 "/presentation/publico/principal",
                                 "/presentation/publico/puestos",
                                 "/presentation/publico/filtrar",
@@ -41,16 +43,45 @@ public class SecurityConfig {
                         ).hasAuthority("Empresa")
                         .anyRequest().authenticated()
                 )
-                .formLogin(customizer -> customizer
+                .formLogin(form -> form
                         .loginPage("/login")
                         .loginProcessingUrl("/login")
-                        .defaultSuccessUrl("/presentation/publico/principal", true)
-                        .failureUrl("/presentation/login/form?error=true")
+                        .successHandler((request, response, authentication) -> {
+                            for (GrantedAuthority authority : authentication.getAuthorities()) {
+                                String role = authority.getAuthority();
+
+                                if ("Administrador".equals(role)) {
+                                    response.sendRedirect("/presentation/admin/dashboard");
+                                    return;
+                                }
+
+                                if ("Empresa".equals(role)) {
+                                    response.sendRedirect("/presentation/empresa/dashboard");
+                                    return;
+                                }
+                                if ("Oferente".equals(role)) {
+                                    response.sendRedirect("/presentation/publico/principal");
+                                    return;
+                                }
+                            }
+
+                            response.sendRedirect("/presentation/publico/principal");
+                        })
+                        .failureHandler((request, response, exception) -> {
+                            String message = exception.getClass().getSimpleName();
+
+                            if ("DisabledException".equals(message)) {
+                                response.sendRedirect("/login?pendingApproval=true");
+                                return;
+                            }
+
+                            response.sendRedirect("/login?error=true");
+                        })
                         .permitAll()
                 )
                 .logout(customizer -> customizer
                         .logoutUrl("/logout")
-                        .logoutSuccessUrl("/presentation/login/form?logout=true")
+                        .logoutSuccessUrl("/login?logout=true")
                         .invalidateHttpSession(true)
                         .clearAuthentication(true)
                         .deleteCookies("JSESSIONID")
@@ -63,7 +94,6 @@ public class SecurityConfig {
 
         return http.build();
     }
-
     @Bean
     public PasswordEncoder passwordEncoder() {
         return NoOpPasswordEncoder.getInstance();
