@@ -3,49 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <title>Registrar Empresa</title>
+    <link rel="stylesheet" th:href="@{/css/empresa/registroEmpresa.css}" type="text/css">
     <link rel="stylesheet" th:href="@{/css/styles.css}" type="text/css">
 </head>
 
 <body>
 <header th:replace="presentation/fragments/header :: header"></header>
-<main>
-    <div class ="page__container">
-        <h1>Registrar Empresa</h1>
-        <form method="POST" th:object="${empresa}" th:action="@{/presentation/empresa/registrar}">
-            <div class ="page__usuario">
-                <h3>Datos de usuario</h3>
+<main class="empresa-registro">
+    <div class="empresa-registro__container">
+        <h1 class="empresa-registro__title">Registro de Empresa</h1>
 
-                <label>Nombre del usuario</label>
-                <input type="text" name="nombreUsuario" required>
+        <form class="empresa-registro__form" method="POST" th:object="${empresa}"
+              th:action="@{/presentation/empresa/registrar}">
 
-                <label>Clave</label>
-                <input type="password" name="clave" required>
+            <div class="empresa-registro__field">
+                <label class="empresa-registro__label">Nombre del usuario</label>
+                <input class="empresa-registro__input" type="text" name="nombreUsuario" required>
             </div>
 
-            <div class ="page__empresa">
-                <h3>Datos de la empresa</h3>
-
-                <label>Nombre de la empresa</label>
-                <input type="text" th:field="*{nombre}" required>
-
-                <label>Localización</label>
-                <input type="text" th:field="*{localizacion}" required>
-
-                <label>Correo electrónico</label>
-                <input type="email" th:field="*{correoElectronico}" required>
-
-                <label>Teléfono</label>
-                <input type="text" th:field="*{telefono}" required>
-
-                <label>Descripción</label>
-                <textarea th:field="*{descripcion}" required></textarea>
+            <div class="empresa-registro__field">
+                <label class="empresa-registro__label">Clave</label>
+                <input class="empresa-registro__input" type="password" name="clave" required>
             </div>
 
-            <button type="submit">Guardar Empresa</button>
+            <div class="empresa-registro__field">
+                <label class="empresa-registro__label">Nombre de la empresa</label>
+                <input class="empresa-registro__input" type="text" th:field="*{nombre}" required>
+            </div>
+
+            <div class="empresa-registro__field">
+                <label class="empresa-registro__label">Localización</label>
+                <input class="empresa-registro__input" type="text" th:field="*{localizacion}" required>
+            </div>
+
+            <div class="empresa-registro__field">
+                <label class="empresa-registro__label">Correo electrónico</label>
+                <input class="empresa-registro__input" type="email" th:field="*{correoElectronico}" required>
+            </div>
+
+            <div class="empresa-registro__field">
+                <label class="empresa-registro__label">Teléfono</label>
+                <input class="empresa-registro__input" type="text" th:field="*{telefono}" required>
+            </div>
+
+            <div class="empresa-registro__field">
+                <label class="empresa-registro__label">Descripción</label>
+                <textarea class="empresa-registro__textarea" th:field="*{descripcion}" required></textarea>
+            </div>
+
+            <button class="empresa-registro__submit" type="submit">Guardar Empresa</button>
 
         </form>
-
-
     </div>
 </main>
 
