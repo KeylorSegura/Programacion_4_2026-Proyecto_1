@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mi CV</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" type="text/css">
+</head>
+<body>
+<header th:replace="presentation/fragments/header :: header"></header>
+<main>
+    <div class="page__container">
+        <h1>Mi CV</h1>
+        <form th:action="@{/presentation/oferente/subirCV}" enctype="multipart/form-data" method="post">
+            <div class="elegir_archivo">
+                <label>Archivo PDF</label>
+                <input type="file" name="archivo" accept="application/pdf" />
+            </div>
+            <div class="boton">
+                <button type="submit">Subir</button>
+            </div>
+        </form>
+        <div>
+            <p th:if="${tieneCV}" >
+                Ya existe un CV cargado
+            </p>
+
+            <p th:if="${!tieneCV}">
+                No existe ningún CV cargado
+            </p>
+
+            <div class="boton">
+                <a target="_blank" th:href="@{/presentation/oferente/verCV}">
+                    <button type="button"  th:disabled="${!tieneCV}">Ver CV</button>
+                </a>
+            </div>
+        </div>
+    </div>
+</main>
+<footer class="page__footer" th:replace="presentation/fragments/Footer :: footer"></footer>
+</body>
+</html>

@@ -33,14 +33,6 @@ public class Controller_publico {
     }
 
 
-//    @GetMapping("/show")
-//    public String show(Model model) {
-//
-//        model.addAttribute("puesto", new Puesto());
-//
-//        return "presentation/publico/Pruebaaa";
-//    }
-
     @PostMapping("/filtrar")
     public String filtrar(
             @RequestParam(required = false) List<Integer> caracteristicaIds,

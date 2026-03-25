@@ -34,6 +34,9 @@ public class SecurityConfig {
                                 "/presentation/admin/**"
                         ).hasAuthority("Administrador")
                         .requestMatchers(
+                                "/presentation/oferente/**"
+                        ).hasAuthority("Oferente")
+                        .requestMatchers(
                                 "/presentation/empresa",
                                 "/presentation/empresa/dashboard",
                                 "/presentation/empresa/puesto/registrar",
@@ -60,7 +63,7 @@ public class SecurityConfig {
                                     return;
                                 }
                                 if ("Oferente".equals(role)) {
-                                    response.sendRedirect("/presentation/publico/principal");
+                                    response.sendRedirect("/presentation/oferente/dashboard");
                                     return;
                                 }
                             }

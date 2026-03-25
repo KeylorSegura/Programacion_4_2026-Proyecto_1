@@ -2,6 +2,7 @@ package progra4.proyecto_1.logic;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 import progra4.proyecto_1.data.*;
 
 import java.util.*;
@@ -28,8 +29,11 @@ public class Service {
     }
 
     public List<Puesto> ultimos5Puestos() {
-        List<Puesto> ultimos = puestos.findAll();
-        return ultimos.stream().limit(5).toList();
+        return puestos.findAll().stream()
+                .filter(p -> "PUBLICO".equalsIgnoreCase(p.getTipoPublicacion()))
+                .sorted((p1, p2) -> Long.compare(p2.getId(), p1.getId()))
+                .limit(5)
+                .toList();
     }
 
     public Empresa getEmpresaPorUsuario(String nombreUsuario) {
@@ -298,5 +302,24 @@ public class Service {
         }
     }
 
+    @Transactional
+    public void guardarCV(Usuario usuario, MultipartFile archivo) throws Exception {
+        Oferente oferente = getOferenteByUsuario(usuario);
+
+        if (!archivo.isEmpty()) {
+            oferente.setCurriculum(archivo.getBytes());
+            oferentes.save(oferente);
+        }
+    }
+
+    public byte[] obtenerCV(Usuario usuario) {
+        Oferente oferente = getOferenteByUsuario(usuario);
+        return oferente.getCurriculum();
+    }
+
+    public boolean existeCV(Usuario usuario){
+        byte[] cv = obtenerCV(usuario);
+        return (cv != null && cv.length > 0);
+    }
 
 }

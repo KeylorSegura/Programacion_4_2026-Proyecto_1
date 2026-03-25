@@ -1,9 +1,13 @@
 package progra4.proyecto_1.presentation.oferente;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import progra4.proyecto_1.logic.*;
 import org.springframework.ui.Model;
 
@@ -89,4 +93,40 @@ public class Controller_oferente {
 
         return "redirect:/presentation/oferente/habilidades";
     }
+
+    @GetMapping("/cv")
+    public String miCV(Model model,
+                       @AuthenticationPrincipal(expression = "usuario") Usuario usuario){
+        model.addAttribute("tieneCV", service.existeCV(usuario));
+        return "presentation/oferente/ViewMiCV";
+    }
+
+    @PostMapping("/subirCV")
+    public String subirCV(@RequestParam("archivo") MultipartFile archivo,
+                          @AuthenticationPrincipal(expression = "usuario") Usuario usuario) {
+
+        try {
+            service.guardarCV(usuario, archivo);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "redirect:/presentation/oferente/cv";
+    }
+
+    @GetMapping("/verCV")
+    public ResponseEntity<byte[]> verCV(@AuthenticationPrincipal(expression = "usuario") Usuario usuario) {
+
+        byte[] pdf = service.obtenerCV(usuario);
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=cv.pdf")
+                .contentType(MediaType.APPLICATION_PDF)
+                .body(pdf);
+    }
+
+    @GetMapping("/dashboard")
+    public String dashboard(Model model){
+        return "presentation/oferente/ViewDashboard";
+    }
+
 }
