@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" th:href="@{/css/styles.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/empresa/dashboard.css}" type="text/css">
     <title>Empresa - Dashboard</title>
 </head>
 <body>
-<!--<header th:replace="presentation/fragments/headerEmpresa :: header"></header>-->
 <header th:replace="presentation/fragments/header :: header"></header>
-<main>
-    <h1>Empresa - Dashboard</h1>
-    <h2>Desde aquí podés administrar tus puestos y buscar candidatos</h2>
-    <section>
-        <button>
-            <a href=/presentation/empresa/puestos>Ver mis puestos</a>
+<main class="dashboard">
+    <h1 class="dashboard__title">Empresa - Dashboard</h1>
+    <h2 class="dashboard__subtitle">Desde aquí podés administrar tus puestos y buscar candidatos</h2>
+    <section class="dashboard__actions">
+        <button class="dashboard__action-btn">
+            <a class="dashboard__action-link" href="/presentation/empresa/puestos">Ver mis puestos</a>
         </button>
-        <button>
-            <a href=/presentation/empresa/puesto/registrar>Publicar nuevo puesto</a>
+        <button class="dashboard__action-btn">
+            <a class="dashboard__action-link" href="/presentation/empresa/puesto/registrar">Publicar nuevo puesto</a>
         </button>
     </section>
 </main>
