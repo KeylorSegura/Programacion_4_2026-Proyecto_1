@@ -1,0 +1,200 @@
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #f4f7f9;
+    color: #333;
+    line-height: 1.6;
+}
+
+
+
+/* Contenedor principal */
+.main {
+    display: flex;
+    justify-content: center;
+    padding: 3rem 1rem;
+    min-height: 75.8vh;
+}
+
+.main__container {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 2rem;
+    max-width: 1800px;
+    width: 100%;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.page {
+    display: flex;
+    flex-direction: column;
+}
+
+.habilidades__grid {
+    display: flex;
+    gap: 2rem;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+/* Títulos */
+.page__title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    color: #111827;
+}
+
+.habilidades__subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: #374151;
+}
+
+/* Paneles de habilidades */
+.habilidades__panel {
+    background-color: #f9fafb;
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+
+    flex: 1;
+    min-width: 250px;
+}
+
+/* Tablas de habilidades */
+.habilidades__table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+    border: 1px solid #d1d5db;
+}
+
+.habilidades__header,
+.habilidades__cell {
+    border: 1px solid #d1d5db;
+}
+
+.habilidades__row:hover {
+    background-color: #eef2ff;
+}
+
+.habilidades__thead {
+    background-color: #e5e7eb;
+}
+
+.habilidades__header {
+    text-align: left;
+    padding: 0.75rem;
+    font-weight: 600;
+    color: #111827;
+    background-color: #e5e7eb;
+}
+
+.habilidades__tbody .habilidades__row:nth-child(even) {
+    background-color: #f3f4f6;
+}
+
+.habilidades__cell {
+    padding: 0.75rem;
+    color: #374151;
+}
+
+.habilidades__link {
+    display: inline-block;
+    padding: 0.3rem 0.7rem;
+    background-color: #e5e7eb;
+    border-radius: 6px;
+    color: #111827;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+
+.habilidades__link:hover {
+    background-color: #d1d5db;
+    text-decoration: none;
+}
+
+/* Breadcrumb */
+.habilidades__breadcrumb {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.habilidades__separator {
+    color: #6b7280;
+    margin: 0 0.2rem;
+}
+
+/* Formulario agregar habilidad */
+.habilidades-form__field {
+    margin-bottom: 1rem;
+    text-align: left;
+}
+
+.habilidades-form__label {
+    font-weight: 500;
+    color: #4b5563;
+}
+
+.habilidades-form__select,
+.habilidades-form__input {
+    width: 100%;
+    padding: 0.6rem 1rem;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border 0.3s, box-shadow 0.3s;
+}
+
+.habilidades-form__select:focus,
+.habilidades-form__input:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59,130,246,0.2);
+    outline: none;
+}
+
+.habilidades-form__actions {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.habilidades-form__button {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: #3b82f6;
+    color: #fff;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.habilidades-form__button:hover {
+    background-color: #2563eb;
+    transform: translateY(-2px);
+}
+
+.habilidades__cell a.habilidades__link {
+    background-color: #3b82f6;
+    color: white;
+    padding: 0.3rem 0.7rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+}
+
+.habilidades__cell a.habilidades__link:hover {
+    background-color: #2563eb;
+}
+

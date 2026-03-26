@@ -4,55 +4,56 @@
     <meta charset="UTF-8">
     <title>Registrar Oferente</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/publico/registro.css}" type="text/css">
 </head>
 
 <body>
 <header th:replace="presentation/fragments/header :: header"></header>
-<main>
-    <div class ="page__container">
-        <h1>Registrar Oferente</h1>
-        <form method="POST" th:object="${oferente}" th:action="@{/presentation/oferente/registrar}">
-            <div class ="page__usuario">
-                <h3>Datos de usuario</h3>
+<main class="main">
+    <div class="main__container page">
+        <h1 class="page__title">Registrar Oferente</h1>
 
-                <label>Nombre del usuario</label>
-                <input type="text" name="nombreUsuario" required>
+        <form class="form" method="POST" th:object="${oferente}" th:action="@{/presentation/oferente/registrar}">
 
-                <label>Clave</label>
-                <input type="password" name="clave" required>
+            <!-- Datos de usuario -->
+            <div class="form__section form__section--usuario">
+                <h3 class="form__section-title">Datos de usuario</h3>
+
+                <label class="form__label" for="nombreUsuario">Nombre del usuario</label>
+                <input class="form__input" type="text" id="nombreUsuario" name="nombreUsuario" required>
+
+                <label class="form__label" for="clave">Clave</label>
+                <input class="form__input" type="password" id="clave" name="clave" required>
             </div>
 
-            <div class ="page__oferente">
-                <h3>Datos de la oferente</h3>
+            <!-- Datos del oferente -->
+            <div class="form__section form__section--oferente">
+                <h3 class="form__section-title">Datos del oferente</h3>
 
-                <label>Nombre del oferente</label>
-                <input type="text" th:field="*{nombre}" required>
+                <label class="form__label" for="nombre">Nombre del oferente</label>
+                <input class="form__input" type="text" id="nombre" th:field="*{nombre}" required>
 
-                <label>Primer apellido</label>
-                <input type="text" th:field="*{primerApellido}" required>
+                <label class="form__label" for="primerApellido">Primer apellido</label>
+                <input class="form__input" type="text" id="primerApellido" th:field="*{primerApellido}" required>
 
-                <label>Nacionalidad</label>
-                <input type="text" th:field="*{primerApellido}" required>
+                <label class="form__label" for="nacionalidad">Nacionalidad</label>
+                <input class="form__input" type="text" id="nacionalidad" th:field="*{nacionalidad}" required>
 
-                <label>Teléfono</label>
-                <input type="text" th:field="*{telefono}" required>
+                <label class="form__label" for="telefono">Teléfono</label>
+                <input class="form__input" type="text" id="telefono" th:field="*{telefono}" required>
 
-                <label>Correo electrónico</label>
-                <input type="email" th:field="*{correoElectronico}" required>
+                <label class="form__label" for="correoElectronico">Correo electrónico</label>
+                <input class="form__input" type="email" id="correoElectronico" th:field="*{correoElectronico}" required>
 
-                <label>Lugar de residencia</label>
-                <input type="text" th:field="*{lugarResidencia}" required>
+                <label class="form__label" for="lugarResidencia">Lugar de residencia</label>
+                <input class="form__input" type="text" id="lugarResidencia" th:field="*{lugarResidencia}" required>
             </div>
 
-            <button type="submit">Guardar Oferente</button>
-
+            <button class="form__button form__button--submit" type="submit">Guardar Oferente</button>
         </form>
-
-
     </div>
 </main>
 
 <footer class="page__footer" th:replace="presentation/fragments/Footer :: footer"></footer>
 </body>
-
 </html>

@@ -6,6 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 import progra4.proyecto_1.data.*;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @org.springframework.stereotype.Service
 public class Service {
@@ -30,7 +31,7 @@ public class Service {
 
     public List<Puesto> ultimos5Puestos() {
         return puestos.findAll().stream()
-                .filter(p -> "Publica".equalsIgnoreCase(p.getTipoPublicacion()))
+                .filter(p -> "Publica".equalsIgnoreCase(p.getTipoPublicacion()) && p.getActivo() == 1)
                 .sorted((p1, p2) -> Long.compare(p2.getId(), p1.getId()))
                 .limit(5)
                 .toList();
@@ -215,19 +216,48 @@ public class Service {
         return caracteristicas.findAll();
     }
 
+    private Set<Integer> obtenerIdsConDescendientes(Integer id) {
+        Set<Integer> resultado = new HashSet<>();
+        Queue<Caracteristica> cola = new LinkedList<>();
+
+        Caracteristica raiz = caracteristicas.findById(id).orElse(null);
+        if (raiz == null) return resultado;
+
+        cola.add(raiz);
+
+        while (!cola.isEmpty()) {
+            Caracteristica actual = cola.poll();
+            resultado.add(actual.getId());
+
+            for (Caracteristica hijo : actual.getCaracteristicas()) {
+                cola.add(hijo);
+            }
+        }
+
+        return resultado;
+    }
 
     public List<Puesto> buscarPorCaracteristicas(List<Integer> caracteristicaIds) {
         if (caracteristicaIds == null || caracteristicaIds.isEmpty()) {
             return new ArrayList<>();
         }
 
+        List<Set<Integer>> grupos = caracteristicaIds.stream()
+                .map(this::obtenerIdsConDescendientes)
+                .toList();
+
         List<Puesto> todosPuestos = puestos.findAll();
 
         return todosPuestos.stream()
-                .filter(p -> p.getPuestocaracteristicas().stream()
-                        .anyMatch(pc -> caracteristicaIds.contains(pc.getCaracteristica().getId()))
-                )
-                .distinct()
+                .filter(p -> "Publica".equalsIgnoreCase(p.getTipoPublicacion()))
+                .filter(puesto -> {
+                    Set<Integer> idsDelPuesto = puesto.getPuestocaracteristicas().stream()
+                            .map(pc -> pc.getCaracteristica().getId())
+                            .collect(Collectors.toSet());
+
+                    return grupos.stream()
+                            .allMatch(grupo -> grupo.stream().anyMatch(idsDelPuesto::contains));
+                })
                 .toList();
     }
 

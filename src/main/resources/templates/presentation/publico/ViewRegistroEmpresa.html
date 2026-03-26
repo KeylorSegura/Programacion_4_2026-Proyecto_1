@@ -4,52 +4,53 @@
     <meta charset="UTF-8">
     <title>Registrar Empresa</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/publico/registro.css}" type="text/css">
 </head>
 
 <body>
 <header th:replace="presentation/fragments/header :: header"></header>
-<main>
-    <div class ="page__container">
-        <h1>Registrar Empresa</h1>
-        <form method="POST" th:object="${empresa}" th:action="@{/presentation/empresa/registrar}">
-            <div class ="page__usuario">
-                <h3>Datos de usuario</h3>
+<main class="main">
+    <div class="main__container page">
+        <h1 class="page__title">Registrar Empresa</h1>
 
-                <label>Nombre del usuario</label>
-                <input type="text" name="nombreUsuario" required>
+        <form class="form" method="POST" th:object="${empresa}" th:action="@{/presentation/empresa/registrar}">
 
-                <label>Clave</label>
-                <input type="password" name="clave" required>
+            <!-- Datos de usuario -->
+            <div class="form__section form__section--usuario">
+                <h3 class="form__section-title">Datos de usuario</h3>
+
+                <label class="form__label" for="nombreUsuario">Nombre del usuario</label>
+                <input class="form__input" type="text" id="nombreUsuario" name="nombreUsuario" required>
+
+                <label class="form__label" for="clave">Clave</label>
+                <input class="form__input" type="password" id="clave" name="clave" required>
             </div>
 
-            <div class ="page__empresa">
-                <h3>Datos de la empresa</h3>
+            <!-- Datos de la empresa -->
+            <div class="form__section form__section--empresa">
+                <h3 class="form__section-title">Datos de la empresa</h3>
 
-                <label>Nombre de la empresa</label>
-                <input type="text" th:field="*{nombre}" required>
+                <label class="form__label" for="nombre">Nombre de la empresa</label>
+                <input class="form__input" type="text" id="nombre" th:field="*{nombre}" required>
 
-                <label>Localización</label>
-                <input type="text" th:field="*{localizacion}" required>
+                <label class="form__label" for="localizacion">Localización</label>
+                <input class="form__input" type="text" id="localizacion" th:field="*{localizacion}" required>
 
-                <label>Correo electrónico</label>
-                <input type="email" th:field="*{correoElectronico}" required>
+                <label class="form__label" for="correoElectronico">Correo electrónico</label>
+                <input class="form__input" type="email" id="correoElectronico" th:field="*{correoElectronico}" required>
 
-                <label>Teléfono</label>
-                <input type="text" th:field="*{telefono}" required>
+                <label class="form__label" for="telefono">Teléfono</label>
+                <input class="form__input" type="text" id="telefono" th:field="*{telefono}" required>
 
-                <label>Descripción</label>
-                <textarea th:field="*{descripcion}" required></textarea>
+                <label class="form__label" for="descripcion">Descripción</label>
+                <textarea class="form__textarea" id="descripcion" th:field="*{descripcion}" required></textarea>
             </div>
 
-            <button type="submit">Guardar Empresa</button>
-
+            <button class="form__button form__button--submit" type="submit">Guardar Empresa</button>
         </form>
-
-
     </div>
 </main>
 
 <footer class="page__footer" th:replace="presentation/fragments/Footer :: footer"></footer>
 </body>
-
 </html>

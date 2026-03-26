@@ -1,0 +1,110 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #f4f7f9;
+    color: #333;
+    line-height: 1.6;
+}
+
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 3rem 1rem;
+    min-height: 80vh;
+}
+
+.main__container {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 2rem;
+    max-width: 600px;
+    width: 100%;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.page__title {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color:#1a1a2e;
+}
+
+.form__section {
+    margin-bottom: 1.5rem;
+}
+
+.form__section-title {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: #374151;
+    border-bottom: 2px solid #e5e7eb;
+    padding-bottom: 0.3rem;
+}
+
+.form__label {
+    display: block;
+    margin-bottom: 0.3rem;
+    font-weight: 500;
+    color: #4b5563;
+}
+
+.form__input {
+    width: 100%;
+    padding: 0.7rem 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border 0.3s, box-shadow 0.3s;
+}
+
+.form__input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+    outline: none;
+}
+
+.form__button {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.form__button--submit {
+    background-color: #007bff;
+    color: #fff;
+    width: 100%;
+}
+
+.form__button--submit:hover {
+    background-color: #2563eb;
+    transform: translateY(-2px);
+}
+
+.form__textarea {
+    width: 100%;
+    padding: 0.7rem 1rem;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: 'Inter', sans-serif;
+    resize: vertical;
+    min-height: 100px;
+    transition: border 0.3s, box-shadow 0.3s;
+}
+
+.form__textarea:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+    outline: none;
+}

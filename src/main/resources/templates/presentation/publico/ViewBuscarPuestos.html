@@ -4,36 +4,49 @@
     <meta charset="UTF-8">
     <title>Buscar Puestos</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}" type="text/css">
+        <link rel="stylesheet" th:href="@{/css/publico/buscarPuestos.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/caracteristicaTree.css}" type="text/css">
 </head>
 <body>
 <header th:replace="presentation/fragments/header :: header"></header>
 
-<main>
-    <div class="page__container">
-        <h1>Busqueda de puestos</h1>
-            <div class="page__filtrador">
-                <form method="post" th:action="@{/presentation/publico/filtrar}">
-                    <h3>Filtrar por caracteristica</h3>
-                    <div th:each="raiz : ${caracteristicasRaiz}">
+<main class="main">
+    <div class="main__container page">
+        <div class="container__left">
+
+            <h1 class="page__title">Búsqueda de puestos</h1>
+
+            <!-- Filtrador -->
+            <div class="page__filtrador filtrador">
+                <form class="filtrador__form" method="post" th:action="@{/presentation/publico/filtrar}">
+                    <h3 class="filtrador__title">Filtrar por característica</h3>
+
+                    <div class="filtrador__tree" th:each="raiz : ${caracteristicasRaiz}">
                         <div th:replace="~{presentation/fragments/CaracteristicaTreePublico :: arbol(${raiz})}"></div>
                     </div>
-                    <div class="page_filtrador__botones">
-                        <button type="submit" name="accion" value="filtrar">Filtrar</button>
-                        <button type="submit" name="accion" value="limpiar">Limpiar</button>
+
+                    <div class="filtrador__buttons">
+                        <button class="filtrador__button filtrador__button--filtrar" type="submit" name="accion" value="filtrar">Filtrar</button>
+                        <button class="filtrador__button filtrador__button--limpiar" type="submit" name="accion" value="limpiar">Limpiar</button>
                     </div>
                 </form>
             </div>
-        <h3>Resultados</h3>
-        <div class="page__resultados">
-            <div th:if="${puestos == null or puestos.isEmpty()}">
-                <p>No hay resultados</p>
-            </div>
+        </div>
+        <!-- Resultados -->
+        <div class="container__right">
 
-            <div th:each="puesto : ${puestos}">
-                <div class="puesto">
-                    <p><strong>Descripción:</strong> <span th:text="${puesto.descripcion}"></span></p>
-                    <p><strong>Salario:</strong> <span th:text="${puesto.salario}"></span></p>
-                    <p><strong>Tipo:</strong> <span th:text="${puesto.tipoPublicacion}"></span></p>
+            <h3 class="page__subtitle">Resultados</h3>
+            <div class="page__resultados resultados">
+                <div class="resultados__empty" th:if="${puestos == null or puestos.isEmpty()}">
+                    <p>No hay resultados</p>
+                </div>
+
+                <div class="resultados__list" th:each="puesto : ${puestos}">
+                    <div class="puesto">
+                        <p class="puesto__empresa"><strong>Empresa:</strong> <span th:text="${puesto.getEmpresa().nombre}"></span></p>
+                        <p class="puesto__descripcion"><strong>Descripción:</strong> <span th:text="${puesto.descripcion}"></span></p>
+                        <p class="puesto__salario"><strong>Salario:</strong> <span>$</span> <span th:text="${puesto.salario}"></span></p>
+                    </div>
                 </div>
             </div>
         </div>

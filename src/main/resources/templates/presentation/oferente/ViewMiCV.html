@@ -4,38 +4,45 @@
     <meta charset="UTF-8">
     <title>Mi CV</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/oferente/miCV.css}" type="text/css">
 </head>
 <body>
-<header th:replace="presentation/fragments/header :: header"></header>
-<main>
-    <div class="page__container">
-        <h1>Mi CV</h1>
-        <form th:action="@{/presentation/oferente/subirCV}" enctype="multipart/form-data" method="post">
-            <div class="elegir_archivo">
-                <label>Archivo PDF</label>
-                <input type="file" name="archivo" accept="application/pdf" />
+<header class="page__header" th:replace="presentation/fragments/header :: header"></header>
+
+<main class="main">
+    <div class="main__container page">
+        <h1 class="page__title">Mi CV</h1>
+
+
+        <form class="cv-form" th:action="@{/presentation/oferente/subirCV}" enctype="multipart/form-data" method="post">
+
+            <div class="cv-form__field">
+                <label class="cv-form__label" for="archivo">Archivo PDF</label>
+                <div class="file-upload-wrapper">
+                    <input class="cv-form__input" type="file" id="archivo" name="archivo" accept="application/pdf"/>
+                    <span class="file-upload-button">Seleccionar:</span>
+                </div>
             </div>
-            <div class="boton">
-                <button type="submit">Subir</button>
+
+            <div class="cv-form__actions">
+                <button class="cv-form__button cv-form__button--submit" type="submit">Subir</button>
             </div>
         </form>
-        <div>
-            <p th:if="${tieneCV}" >
-                Ya existe un CV cargado
-            </p>
 
-            <p th:if="${!tieneCV}">
-                No existe ningún CV cargado
-            </p>
 
-            <div class="boton">
-                <a target="_blank" th:href="@{/presentation/oferente/verCV}">
-                    <button type="button"  th:disabled="${!tieneCV}">Ver CV</button>
+        <div class="cv-status">
+            <p class="cv-status__message" th:if="${tieneCV}">Ya existe un CV cargado</p>
+            <p class="cv-status__message" th:if="${!tieneCV}">No existe ningún CV cargado</p>
+
+            <div class="cv-status__actions">
+                <a class="cv-status__link" target="_blank" th:href="@{/presentation/oferente/verCV}">
+                    <button class="cv-status__button" type="button" th:disabled="${!tieneCV}">Ver CV</button>
                 </a>
             </div>
         </div>
     </div>
 </main>
+
 <footer class="page__footer" th:replace="presentation/fragments/Footer :: footer"></footer>
 </body>
 </html>

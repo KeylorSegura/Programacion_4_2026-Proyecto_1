@@ -4,84 +4,91 @@
     <meta charset="UTF-8">
     <title>Mis Habilidades</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/oferente/misHabilidades.css}" type="text/css">
 </head>
 <body>
-<header th:replace="presentation/fragments/header :: header"></header>
-<main>
-    <div class ="page__container">
-        <h1>Mis Habilidades</h1>
-        <div class="left-panel">
-            <table>
-                <thead>
-                <tr>
-                    <th>Característica</th>
-                    <th>Nivel</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="h : ${habilidades}">
-                    <td th:text="${h.ruta}"></td>
-                    <td th:text="${h.nivel}"></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <div  class="central-panel">
-            <h3>Ruta:</h3>
+<header class="page__header" th:replace="presentation/fragments/header :: header"></header>
 
-            <div>
-                <a th:href="@{/presentation/oferente/habilidades(rutaIndex=0)}">Raíces</a>
 
-                <span th:each="c, iterStat : ${ruta}">
+<main class="main">
+    <div class="main__container page">
+        <h1 class="page__title">Mis Habilidades</h1>
+
+        <div class="habilidades__grid">
+            <div class="habilidades__panel habilidades__panel--lista">
+                <table class="habilidades__table">
+                    <thead class="habilidades__thead">
+                    <tr class="habilidades__row">
+                        <th class="habilidades__header">Característica</th>
+                        <th class="habilidades__header">Nivel</th>
+                    </tr>
+                    </thead>
+                    <tbody class="habilidades__tbody">
+                    <tr class="habilidades__row" th:each="h : ${habilidades}">
+                        <td class="habilidades__cell" th:text="${h.ruta}"></td>
+                        <td class="habilidades__cell" th:text="${h.nivel}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+            <div class="habilidades__panel habilidades__panel--ruta">
+                <h3 class="habilidades__subtitle">Ruta:</h3>
+                <div class="habilidades__breadcrumb">
+                    <a class="habilidades__link" th:href="@{/presentation/oferente/habilidades(rutaIndex=0)}">Raíces</a>
+
+                    <span class="habilidades__separator" th:each="c, iterStat : ${ruta}">
                         /
-                        <a th:text="${c.nombre}"
+                        <a class="habilidades__link" th:text="${c.nombre}"
                            th:href="@{/presentation/oferente/habilidades(rutaIndex=${iterStat.index + 1})}">
                         </a>
                     </span>
+                </div>
+
+                <h4 class="habilidades__subtitle">Subcategorías</h4>
+                <table class="habilidades__table">
+                    <tbody class="habilidades__tbody">
+                    <tr class="habilidades__row" th:each="c : ${caracteristicasActuales}">
+                        <td class="habilidades__cell" th:text="${c.nombre}"></td>
+                        <td class="habilidades__cell">
+                            <a class="habilidades__link" th:href="@{/presentation/oferente/habilidades(seleccion=${c.id})}">
+                                Entrar
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
 
-            <br>
 
-            <h4>Subcategorías</h4>
+            <div class="habilidades__panel habilidades__panel--agregar">
+                <h3 class="habilidades__subtitle">Agregar Habilidad</h3>
 
-            <table>
-                <tbody>
-                <tr th:each="c : ${caracteristicasActuales}">
-                    <td th:text="${c.nombre}"></td>
-                    <td>
-                        <a th:href="@{/presentation/oferente/habilidades(seleccion=${c.id})}">
-                            Entrar
-                        </a>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="central-panel">
-            <h3>Agregar Habilidad</h3>
+                <form class="habilidades-form" th:action="@{/presentation/oferente/agregarHabilidad}" method="post">
+                    <div class="habilidades-form__field">
+                        <label class="habilidades-form__label" for="caracteristicaId">Característica</label><br>
+                        <select class="habilidades-form__select" id="caracteristicaId" name="caracteristicaId">
+                            <option class="habilidades-form__option" th:each="c : ${caracteristicasActuales}"
+                                    th:value="${c.id}" th:text="${c.nombre}">
+                            </option>
+                        </select>
+                    </div>
 
-            <form th:action="@{/presentation/oferente/agregarHabilidad}" method="post">
+                    <div class="habilidades-form__field">
+                        <label class="habilidades-form__label" for="nivel">Nivel (1-5)</label><br>
+                        <input class="habilidades-form__input" type="number" id="nivel" name="nivel" min="1" max="5" required>
+                    </div>
 
-                <label>Característica</label><br>
-                <select name="caracteristicaId">
-                    <option th:each="c : ${caracteristicasActuales}"
-                            th:value="${c.id}"
-                            th:text="${c.nombre}">
-                    </option>
-                </select>
-
-                <br><br>
-
-                <label>Nivel (1-5)</label><br>
-                <input type="number" name="nivel" min="1" max="5" required>
-
-                <br><br>
-
-                <button type="submit">Agregar</button>
-            </form>
+                    <div class="habilidades-form__actions">
+                        <button class="habilidades-form__button" type="submit" th:disabled="${#lists.isEmpty(caracteristicasActuales)}">Agregar</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </main>
+
 <footer class="page__footer" th:replace="presentation/fragments/Footer :: footer"></footer>
 </body>
 </html>

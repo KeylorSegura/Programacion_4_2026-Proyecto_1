@@ -4,26 +4,29 @@
     <meta charset="UTF-8">
     <title>Mi CV</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/oferente/dashboard.css}" type="text/css">
 </head>
 <body>
-<header th:replace="presentation/fragments/header :: header"></header>
-<main>
-    <div class="page__container">
-        <h1>Dashboard</h1>
-        <h3>Administra tus habilidades y tu CV</h3>
-        <div class="botones">
+<header class="page__header" th:replace="presentation/fragments/header :: header"></header>
 
-            <a th:href="@{/presentation/oferente/habilidades}">
-                <button type="button">Mis Habilidades</button>
+<main class="main">
+    <div class="main__container page">
+        <h1 class="page__title">Dashboard</h1>
+        <h3 class="page__subtitle">Administra tus habilidades y tu CV</h3>
+
+        <!-- Bloque de botones -->
+        <div class="dashboard__buttons botones">
+            <a class="dashboard__link" th:href="@{/presentation/oferente/habilidades}">
+                <button class="dashboard__button" type="button">Mis Habilidades</button>
             </a>
 
-            <a th:href="@{/presentation/oferente/cv}">
-                <button type="button">Ver CV</button>
+            <a class="dashboard__link" th:href="@{/presentation/oferente/cv}">
+                <button class="dashboard__button" type="button">Ver CV</button>
             </a>
-
         </div>
     </div>
 </main>
+
 <footer class="page__footer" th:replace="presentation/fragments/Footer :: footer"></footer>
 </body>
 </html>
