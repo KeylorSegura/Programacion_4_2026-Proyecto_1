@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+<div class="caracteristica-nodo" th:fragment="arbolAdmin(nodo)">
+    <details class="caracteristica-nodo__detalle">
+        <summary class="caracteristica-nodo__resumen">
+            <span class="caracteristica-nodo__nombre" th:text="${nodo.nombre}"></span>
+        </summary>
+
+        <div class="caracteristica-nodo__hijos"
+             th:if="${nodo.caracteristicas != null and not nodo.caracteristicas.isEmpty()}">
+            <th:block th:each="hijo : ${nodo.caracteristicas}">
+                <th:block th:if="${hijo.id != nodo.id}">
+                    <div th:replace="~{presentation/fragments/CaracteristicaTreeAdmin :: arbolAdmin(${hijo})}"></div>
+                </th:block>
+            </th:block>
+        </div>
+    </details>
+</div>
+
+</body>
+</html>

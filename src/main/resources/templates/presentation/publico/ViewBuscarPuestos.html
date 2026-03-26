@@ -15,7 +15,7 @@
                 <form method="post" th:action="@{/presentation/publico/filtrar}">
                     <h3>Filtrar por caracteristica</h3>
                     <div th:each="raiz : ${caracteristicasRaiz}">
-                        <div th:replace="~{presentation/fragments/CaracteristicaTree :: arbol(${raiz})}"></div>
+                        <div th:replace="~{presentation/fragments/CaracteristicaTreePublico :: arbol(${raiz})}"></div>
                     </div>
                     <div class="page_filtrador__botones">
                         <button type="submit" name="accion" value="filtrar">Filtrar</button>

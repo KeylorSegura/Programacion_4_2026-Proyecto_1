@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mi CV</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" type="text/css">
+</head>
+<body>
+<header th:replace="presentation/fragments/header :: header"></header>
+<main>
+    <div class="page__container">
+        <h1>Dashboard</h1>
+        <h3>Administra tus habilidades y tu CV</h3>
+        <div class="botones">
+
+            <a th:href="@{/presentation/oferente/habilidades}">
+                <button type="button">Mis Habilidades</button>
+            </a>
+
+            <a th:href="@{/presentation/oferente/cv}">
+                <button type="button">Ver CV</button>
+            </a>
+
+        </div>
+    </div>
+</main>
+<footer class="page__footer" th:replace="presentation/fragments/Footer :: footer"></footer>
+</body>
+</html>

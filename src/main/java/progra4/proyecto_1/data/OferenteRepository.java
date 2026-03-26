@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface OferenteRepository extends JpaRepository<Oferente, String> {
     List<Oferente> findByEstado(int estado);
+    Oferente findByNombreUsuarioId(String nombreUsuarioId);
 }

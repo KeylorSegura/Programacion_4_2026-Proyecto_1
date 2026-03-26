@@ -27,19 +27,14 @@
                 <div class="panel__header">
                     <span class="panel__ruta">Ruta:</span>
 
-                    <!-- EJEMPLO DE BREADCRUMB -->
-                    <div class="panel__breadcrumbs">
-                        <span class="badge">Raíces</span>
-                        <span class="badge">Testing</span>
-                        <span class="badge">JUnit</span>
-                    </div>
+
                 </div>
 
                 <div class="panel__contenido">
 
                     <!-- Aquí metés el árbol -->
                     <div th:each="raiz : ${caracteristicasRaiz}">
-                        <div th:replace="~{presentation/fragments/CaracteristicaTree :: arbol(${raiz})}"></div>
+                        <div th:replace="~{presentation/fragments/CaracteristicaTreeAdmin :: arbolAdmin(${raiz})}"></div>
                     </div>
 
                 </div>
@@ -65,7 +60,7 @@
 
                                 <div class="formulario__grupo">
                                     <label class="formulario__label">Nombre</label>
-                                    <input class="formulario__input" type="text" name="nombre">
+                                    <input class="formulario__input" type="text" name="nombre" required>
                                 </div>
 
                                 <div class="formulario__grupo">

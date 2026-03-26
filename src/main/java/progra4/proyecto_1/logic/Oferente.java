@@ -46,7 +46,8 @@ public class Oferente {
     @Column(name = "estado")
     private Byte estado;
 
-    @Column(name = "curriculum")
+    @Lob
+    @Column(name = "curriculum", columnDefinition = "MEDIUMBLOB")
     private byte[] curriculum;
 
     @OneToMany(mappedBy = "oferente")

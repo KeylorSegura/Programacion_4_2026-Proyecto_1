@@ -2,12 +2,10 @@ package progra4.proyecto_1.logic;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 import progra4.proyecto_1.data.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 @org.springframework.stereotype.Service
 public class Service {
@@ -23,14 +21,19 @@ public class Service {
     private CaracteristicaRepository caracteristicas;
     @Autowired
     private PuestocaracteristicaRepository puestoCaracteristicas;
+    @Autowired
+    private OferentecaracteristicaRepository oferenteCaracteristicas;
 
     public List<Puesto> findAll() {
         return puestos.findAll();
     }
 
     public List<Puesto> ultimos5Puestos() {
-        List<Puesto> ultimos = puestos.findAll();
-        return ultimos.stream().limit(5).toList();
+        return puestos.findAll().stream()
+                .filter(p -> "Publica".equalsIgnoreCase(p.getTipoPublicacion()))
+                .sorted((p1, p2) -> Long.compare(p2.getId(), p1.getId()))
+                .limit(5)
+                .toList();
     }
 
     public Empresa getEmpresaPorUsuario(String nombreUsuario) {
@@ -50,7 +53,20 @@ public class Service {
     }
 
     public List<Caracteristica> getCaracteristicasRaiz() {
-        return caracteristicas.findRoots();
+        List<Caracteristica> raices = caracteristicas.findRoots();
+
+        ordenarRecursivo(raices);
+
+        return raices;
+    }
+
+    private void ordenarRecursivo(Collection<Caracteristica> nodos) {
+        if (nodos == null) return;
+        List<Caracteristica> lista = new ArrayList<>(nodos);
+        lista.sort(Comparator.comparing(Caracteristica::getNombre));
+        for (Caracteristica nodo : lista) {
+            ordenarRecursivo(nodo.getCaracteristicas());
+        }
     }
 
     public void eliminarTodosPuestos() {
@@ -141,6 +157,8 @@ public class Service {
                                             && oc.getNivel() >= req.getNivel()
                             )
                     ).count();
+
+
                     if (cumplidos == 0) return null;
 
                     int porcentaje = (int) (cumplidos * 100 / requisitos.size());
@@ -179,21 +197,21 @@ public class Service {
         return oferentes.findById(String.valueOf(id)).orElseThrow();
     }
 
-    public void crearCaracteristica(String nombre, Integer padreId) {
+    public void crearCaracteristica(String nombre, Integer padreId){
         Caracteristica caracteristica = new Caracteristica();
         caracteristica.setNombre(nombre);
 
-        if (padreId == null) {
+        if (padreId == null){
             caracteristica.setPadre(null);
             caracteristicas.save(caracteristica);
-        } else {
+        }
+        else{
             Caracteristica padre = caracteristicas.findById(padreId).orElseThrow(() -> new RuntimeException("Padre no existe"));
             caracteristica.setPadre(padre);
             caracteristicas.save(caracteristica);
         }
     }
-
-    public List<Caracteristica> findCaracteristicas() {
+    public List<Caracteristica> findCaracteristicas(){
         return caracteristicas.findAll();
     }
 
@@ -224,4 +242,124 @@ public class Service {
         oferente.setNombreUsuario(usuario);
         oferentes.save(oferente);
     }
+
+
+    public String construirRutaCaracteristica(Caracteristica c) {
+        if (c.getPadre() == null) {
+            return c.getNombre();
+        }
+        return construirRutaCaracteristica(c.getPadre()) + " / " + c.getNombre();
+    }
+
+
+    public Oferente getOferenteByUsuario(Usuario usuario) {
+        return oferentes.findAll().stream()
+                .filter(o -> o.getNombreUsuario().getId().equals(usuario.getId()))
+                .findFirst()
+                .orElseThrow();
+    }
+
+    public List<Map<String, Object>> getHabilidadesConRuta(Usuario usuario) {
+        Oferente oferente = getOferenteByUsuario(usuario);
+
+        return oferente.getOferentecaracteristicas().stream()
+                .sorted(Comparator.comparing(
+                        oc -> construirRutaCaracteristica(oc.getCaracteristica())
+                ))
+                .map(oc -> Map.<String, Object>of(
+                        "ruta", construirRutaCaracteristica(oc.getCaracteristica()),
+                        "nivel", oc.getNivel()
+                ))
+                .toList();
+    }
+
+    public List<Caracteristica> getHijos(Integer padreId) {
+        return caracteristicas.findAll().stream()
+                .filter(c -> c.getPadre() != null &&
+                        c.getPadre().getId().equals(padreId))
+                .toList();
+    }
+
+    public Caracteristica getCaracteristicaById(Integer id) {
+        return caracteristicas.findById(id).orElseThrow();
+    }
+
+    @Transactional
+    public void agregarHabilidad(Usuario usuario, Integer caracteristicaId, Integer nivel) {
+        Oferente oferente = getOferenteByUsuario(usuario);
+
+        Caracteristica caracteristica = caracteristicas.findById(caracteristicaId)
+                .orElseThrow(() -> new RuntimeException("Característica no existe"));
+
+        Oferentecaracteristica existente = oferente.getOferentecaracteristicas()
+                .stream()
+                .filter(oc -> oc.getCaracteristica().getId().equals(caracteristicaId))
+                .findFirst()
+                .orElse(null);
+
+        if (existente != null) {
+            existente.setNivel(nivel);
+        } else {
+            Oferentecaracteristica nueva = new Oferentecaracteristica();
+            nueva.setOferente(oferente);
+            nueva.setCaracteristica(caracteristica);
+            nueva.setNivel(nivel);
+
+            oferenteCaracteristicas.save(nueva);
+        }
+    }
+
+    @Transactional
+    public void guardarCV(Usuario usuario, MultipartFile archivo) throws Exception {
+        Oferente oferente = getOferenteByUsuario(usuario);
+
+        if (!archivo.isEmpty()) {
+            oferente.setCurriculum(archivo.getBytes());
+            oferentes.save(oferente);
+        }
+    }
+
+    public byte[] obtenerCV(Usuario usuario) {
+        Oferente oferente = getOferenteByUsuario(usuario);
+        return oferente.getCurriculum();
+    }
+
+    public boolean existeCV(Usuario usuario){
+        byte[] cv = obtenerCV(usuario);
+        return (cv != null && cv.length > 0);
+    }
+
+
+    public void marcarArbolAbierto(List<Caracteristica> raices, List<Integer> seleccionados) {
+        for (Caracteristica raiz : raices) {
+            marcarNodo(raiz, seleccionados);
+        }
+    }
+
+    private boolean marcarNodo(Caracteristica nodo, List<Integer> seleccionados) {
+        boolean abierto = false;
+
+        if (nodo.getCaracteristicas() != null) {
+            for (Caracteristica hijo : nodo.getCaracteristicas()) {
+                boolean hijoAbierto = marcarNodo(hijo, seleccionados);
+                if (hijoAbierto) {
+                    abierto = true;
+                }
+            }
+        }
+
+        if (abierto) {
+            nodo.setAbierto(true);
+            return true;
+        }
+
+        if (seleccionados.contains(nodo.getId())) {
+            nodo.setAbierto(false);
+            return true;
+        }
+
+        nodo.setAbierto(false);
+        return false;
+    }
+
 }
