@@ -2,6 +2,9 @@ package progra4.proyecto_1.presentation.empresa;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -95,6 +98,15 @@ public class Controller_empresa {
         model.addAttribute("empresa", service.getEmpresaPorUsuario(userDetails.getUsername()));
         model.addAttribute("oferente", service.getOferenteById(id));
         return "presentation/empresa/ViewDetallesCandidatos";
+    }
+
+    @GetMapping("/candidatos/oferente/verCV")
+    public ResponseEntity<byte[]> verCVOferente(@RequestParam Integer id) {
+        byte[] pdf = service.getOferenteById(id).getCurriculum();
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=cv.pdf")
+                .contentType(MediaType.APPLICATION_PDF)
+                .body(pdf);
     }
 
 }

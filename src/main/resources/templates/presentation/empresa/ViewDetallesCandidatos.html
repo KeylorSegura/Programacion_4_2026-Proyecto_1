@@ -4,12 +4,19 @@
     <meta charset="UTF-8">
     <title>Empresa - Detalles candidato</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/empresa/detallesCandidatos.css}" type="text/css">
 </head>
 <body>
 <header th:replace="presentation/fragments/header :: header"></header>
 
 <main class="candidato-detalle">
     <h1 class="candidato-detalle__title">Detalle del oferente</h1>
+
+    <div class="boton">
+        <a target="_blank" th:href="@{/presentation/empresa/candidatos/oferente/verCV(id=${oferente.id})}">
+            <button type="button">Ver CV</button>
+        </a>
+    </div>
 
     <section class="candidato-detalle__info">
         <h2 class="candidato-detalle__info-title">Detalle de oferente</h2>
@@ -20,7 +27,8 @@
             <li class="candidato-detalle__list-item">Identificación: <span th:text="${oferente.id}"></span></li>
             <li class="candidato-detalle__list-item">Email: <span th:text="${oferente.correoElectronico}"></span></li>
             <li class="candidato-detalle__list-item">Teléfono: <span th:text="${oferente.telefono}"></span></li>
-            <li class="candidato-detalle__list-item">Residencia: <span th:text="${oferente.lugarResidencia}"></span></li>
+            <li class="candidato-detalle__list-item">Residencia: <span th:text="${oferente.lugarResidencia}"></span>
+            </li>
         </ul>
     </section>
 
@@ -41,6 +49,10 @@
             </tbody>
         </table>
     </section>
+
+    <div class="candidato-detalle__volver">
+        <button type="button" onclick="history.back()">Volver</button>
+    </div>
 </main>
 </body>
 </html>
