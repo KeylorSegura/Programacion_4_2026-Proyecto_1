@@ -46,7 +46,7 @@
 
             <ul class="card__list">
               <li class="card__list-item" th:each="pc : ${p.puestocaracteristicas}">
-                <span class="card__skill" th:text="${pc.caracteristica.nombre}"></span>
+                <span class="card__skill" th:text="${pc.caracteristica.rutaCompleta}"></span>
                 -
                 Nivel:
                 <span class="card__level" th:text="${pc.nivel}"></span>

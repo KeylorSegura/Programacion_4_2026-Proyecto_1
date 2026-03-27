@@ -42,4 +42,14 @@ public class Caracteristica {
     public void setAbierto(boolean abierto) {
         this.abierto = abierto;
     }
+
+    public String getRutaCompleta() {
+        return buildRuta(this);
+    }
+
+    private String buildRuta(Caracteristica c) {
+        if (c == null) return "";
+        if (c.getPadre() == null) return c.getNombre();
+        return buildRuta(c.getPadre()) + " / " + c.getNombre();
+    }
 }

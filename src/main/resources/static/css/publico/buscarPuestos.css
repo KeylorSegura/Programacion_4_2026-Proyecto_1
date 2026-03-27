@@ -24,11 +24,26 @@ body {
     background-color: #fff;
     border-radius: 12px;
     padding: 2rem;
-    max-width: 600px;
+    max-width: 1600px;
     width: 100%;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
+.habilidades__grid {
+    display: flex;
+    gap: 2rem;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.container__left {
+    flex: 0 0 30%;
+    max-width: 350px;
+}
+
+.container__right {
+    flex: 1;
+}
 
 .page__title {
     text-align: center;
@@ -110,12 +125,21 @@ body {
     text-align: center;
 }
 
+.resultados__list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    justify-items: start;
+}
+
 .resultados__list .puesto {
     background-color: #fff;
     padding: 1rem;
     border-radius: 8px;
     margin-bottom: 1rem;
     box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+    width: 100%;
+    max-width: 300px;
 }
 
 .puesto__descripcion,
