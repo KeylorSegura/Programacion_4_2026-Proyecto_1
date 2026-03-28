@@ -78,3 +78,33 @@ footer {
     padding: 15px 40px;
     font-size: 14px;
 }
+
+.navbar__user span {
+    color: #cfcfcf;
+    font-size: 18px;
+}
+
+.navbar__user a {
+    color: white;
+    text-decoration: none;
+    border: 1px solid #888;
+    padding: 5px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: all 0.2s ease;
+
+}
+
+.navbar__user a:hover {
+    background: white;
+    color: black;
+    border-color: white;
+}
+
+.navbar__user {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-left: auto;
+    color: white;
+}

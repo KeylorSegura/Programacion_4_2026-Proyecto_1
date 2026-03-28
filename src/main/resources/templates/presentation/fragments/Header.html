@@ -48,11 +48,8 @@
         <!-- Si sí ha iniciado sesión -->
         <th:block sec:authorize="isAuthenticated()">
             <div class="navbar__user">
-                <a class="navbar__login-link" href="#">&#128100;</a>
-                <ul class="navbar__submenu">
-                    <li>-- <span sec:authentication="name"></span> --</li>
-                    <li><a href="/logout">Logout</a></li>
-                </ul>
+                   <span sec:authentication="name"></span>
+                    <a href="/logout">Salir</a>
             </div>
         </th:block>
     </div>
