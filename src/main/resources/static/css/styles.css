@@ -3,6 +3,12 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     background: #f5f5f5;
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
 }
 
 
@@ -70,7 +76,6 @@ body {
 /* ===== INICIO: Estilos del footer ===== */
 
 footer {
-    margin-top: 60px;
     background: black;
     color: white;
     display: flex;
