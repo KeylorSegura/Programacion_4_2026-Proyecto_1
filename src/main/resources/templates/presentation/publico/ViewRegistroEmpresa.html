@@ -13,6 +13,10 @@
     <div class="main__container page">
         <h1 class="page__title">Registrar Empresa</h1>
 
+        <div th:if="${error}" class="message--error">
+            <p th:text="${error}"></p>
+        </div>
+
         <form class="form" method="POST" th:object="${empresa}" th:action="@{/presentation/empresa/registrar}">
 
             <!-- Datos de usuario -->

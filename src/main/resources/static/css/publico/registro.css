@@ -108,3 +108,11 @@ body {
     box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
     outline: none;
 }
+
+.message--error {
+    background: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #fecaca;
+    border-radius: 8px;
+    padding: 5px;
+}

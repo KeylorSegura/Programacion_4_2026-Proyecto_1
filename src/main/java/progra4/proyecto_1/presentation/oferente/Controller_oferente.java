@@ -16,6 +16,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+
+
 @Controller
 @RequestMapping("/presentation/oferente")
 @SessionAttributes("ruta")
@@ -37,10 +39,16 @@ public class Controller_oferente {
     @PostMapping("/registrar")
     public String create(@ModelAttribute Oferente oferente,
                          @RequestParam String nombreUsuario,
-                         @RequestParam String clave) {
-        oferente.setEstado((byte) 0);
-        service.agregarOferente(oferente, nombreUsuario, clave);
-        return "redirect:/presentation/publico/principal";
+                         @RequestParam String clave,
+                         Model model) {
+        try {
+            oferente.setEstado((byte) 0);
+            service.agregarOferente(oferente, nombreUsuario, clave);
+            return "redirect:/presentation/publico/principal";
+        } catch (IllegalArgumentException e) {
+            model.addAttribute("error", e.getMessage());
+            return "presentation/publico/ViewRegistroOferente";
+        }
     }
 
     @GetMapping("/habilidades")
@@ -104,6 +112,7 @@ public class Controller_oferente {
     @PostMapping("/subirCV")
     public String subirCV(@RequestParam("archivo") MultipartFile archivo,
                           @AuthenticationPrincipal(expression = "usuario") Usuario usuario) {
+
 
         try {
             service.guardarCV(usuario, archivo);

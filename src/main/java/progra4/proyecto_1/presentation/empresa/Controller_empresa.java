@@ -33,10 +33,17 @@ public class Controller_empresa {
     @PostMapping("/registrar")
     public String create(@ModelAttribute Empresa empresa,
                          @RequestParam String nombreUsuario,
-                         @RequestParam String clave) {
-        empresa.setEstado((byte) 0);
-        service.agregarEmpresa(empresa, nombreUsuario, clave);
-        return "redirect:/presentation/publico/principal";
+                         @RequestParam String clave,
+                         Model model) {
+        try {
+            empresa.setEstado((byte) 0);
+            service.agregarEmpresa(empresa, nombreUsuario, clave);
+            return "redirect:/presentation/publico/principal";
+        } catch (IllegalArgumentException e) {
+            model.addAttribute("error", e.getMessage());
+            model.addAttribute("empresa", empresa);
+            return "presentation/publico/ViewRegistroEmpresa";
+        }
     }
 
     @GetMapping("/dashboard")
