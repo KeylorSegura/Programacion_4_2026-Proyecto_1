@@ -20,7 +20,7 @@ public class Usuario {
     @Column(name = "id", nullable = false, length = 45)
     private String id;
 
-    @Column(name = "clave", length = 45)
+    @Column(name = "clave", length = 255)
     private String clave;
 
     @Column(name = "tipo", length = 45)

@@ -22,7 +22,7 @@ DROP TABLE IF EXISTS `proyecto1_programacion4`.`Usuario` ;
 
 CREATE TABLE IF NOT EXISTS `proyecto1_programacion4`.`Usuario` (
   `id` VARCHAR(45) NOT NULL,
-  `clave` VARCHAR(45) NULL,
+  `clave` VARCHAR(255) NULL,
   `tipo` VARCHAR(45) NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
@@ -174,3 +174,12 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+USE `proyecto1_programacion4`;
+
+-- Administradores con clave 1:
+INSERT INTO `Usuario` (`id`, `clave`, `tipo`) VALUES
+('1',     '$2a$10$Y9JcR78QYnYljw71lYH/o.cI8xxHfw1.DS6WfixvroX5FjhYxhiEa', 'Administrador'),
+('admin', '$2a$10$Y9JcR78QYnYljw71lYH/o.cI8xxHfw1.DS6WfixvroX5FjhYxhiEa', 'Administrador'),
+('root',  '$2a$10$Y9JcR78QYnYljw71lYH/o.cI8xxHfw1.DS6WfixvroX5FjhYxhiEa', 'Administrador');
+

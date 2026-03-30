@@ -1,6 +1,7 @@
 package progra4.proyecto_1.logic;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import progra4.proyecto_1.data.*;
@@ -24,6 +25,8 @@ public class Service {
     private PuestocaracteristicaRepository puestoCaracteristicas;
     @Autowired
     private OferentecaracteristicaRepository oferenteCaracteristicas;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public List<Puesto> findAll() {
         return puestos.findAll();
@@ -79,7 +82,7 @@ public class Service {
             throw new IllegalArgumentException("El nombre de usuario ya existe");
         }
 
-        Usuario usuario = new Usuario(idUsuario, clave, "Empresa");
+        Usuario usuario = new Usuario(idUsuario, passwordEncoder.encode(clave), "Empresa");
         usuarios.save(usuario);
 
         empresa.setNombreUsuario(usuario);
@@ -266,7 +269,7 @@ public class Service {
             throw new IllegalArgumentException("El nombre de usuario ya existe");
         }
 
-        Usuario usuario = new Usuario(idUsuario, clave, "Oferente");
+        Usuario usuario = new Usuario(idUsuario, passwordEncoder.encode(clave), "Oferente");
         usuarios.save(usuario);
 
         oferente.setNombreUsuario(usuario);

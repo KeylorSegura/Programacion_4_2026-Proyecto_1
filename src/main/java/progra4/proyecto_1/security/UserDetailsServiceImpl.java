@@ -1,7 +1,6 @@
 package progra4.proyecto_1.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -31,21 +30,15 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
             if ("Empresa".equals(usr.getTipo())) {
                 Empresa empresa = empresaRepository.findByNombreUsuarioId(username);
-                //enabled = empresa != null && Byte.valueOf((byte) 1).equals(empresa.getEstado());
-                if (empresa == null || !Byte.valueOf((byte) 1).equals(empresa.getEstado())) {
-                    throw new DisabledException("Empresa pendiente de aprobación");
-                }
+                enabled = empresa != null && Byte.valueOf((byte) 1).equals(empresa.getEstado());
             }
 
             if ("Oferente".equals(usr.getTipo())) {
                 Oferente oferente = oferenteRepository.findByNombreUsuarioId(username);
-                //enabled = oferente != null && Byte.valueOf((byte) 1).equals(oferente.getEstado());
-                if (oferente == null || !Byte.valueOf((byte) 1).equals(oferente.getEstado())) {
-                    throw new DisabledException("Oferente pendiente de aprobación");
-                }
+                enabled = oferente != null && Byte.valueOf((byte) 1).equals(oferente.getEstado());
             }
 
-            return new UserDetailsImp(usr, true);
+            return new UserDetailsImp(usr, enabled);
         } catch (Exception e) {
             throw new UsernameNotFoundException("Username " + username + " not found");
         }
