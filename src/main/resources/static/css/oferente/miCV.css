@@ -55,64 +55,36 @@ body {
     font-weight: 500;
     color: #4b5563;
 }
-.file-upload-wrapper {
-    position: relative;
-    display: inline-block;
-    text-align: right;
-    border: 1px solid #d1d5db;
-    border-radius: 8px;
-    width: 100%;
-}
-
-.cv-form__input[type="file"] {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    text-align: right;
-    cursor: pointer;
-}
-
-.file-upload-button {
-    display: inline-block;
-    padding: 0.5rem 1rem;
-    background-color: #124496;
-    color: #fff;
-    transition: background 0.3s, transform 0.2s;
-    text-align: center;
-    position: absolute;
-    left: 0;
-    top: 0.4px;
-    border-radius: 8px 0px 0px 8px;
-    z-index: 2;
-}
-
-
-
-.cv-form__input {
+.cv-form__file {
     width: 100%;
     padding: 0.5rem;
-    border: 10px solid #d1d5db;
-    border-radius: 8px;
-    font-size: 1rem;
-    background-color: #fff;
-}
-
-
-
-.cv-form__input[type="file"] {
-    width: 100%;
-    padding: 0.5rem 1rem;
     border: 1px solid #d1d5db;
     border-radius: 8px;
     font-size: 1rem;
     background-color: #fff;
-    position: relative;
-    z-index: 1;
+    cursor: pointer;
+    color: #4b5563;
 }
 
-.cv-form__input[type="file"]:focus {
+.cv-form__file::file-selector-button {
+    background-color: #124496;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin-right: 0.75rem;
+    transition: background 0.3s;
+}
+
+.cv-form__file::file-selector-button:hover {
+    background-color: #0e3578;
+}
+
+.cv-form__file:focus {
     border-color: #3b82f6;
     box-shadow: 0 0 0 3px rgba(59,130,246,0.2);
     outline: none;
