@@ -56,30 +56,30 @@
 
                     <div class="formulario">
 
-                            <form method="POST" th:action="@{/presentation/admin/caracteristicas/crear}">
+                        <form method="POST" th:action="@{/presentation/admin/caracteristicas/crear}">
 
-                                <div class="formulario__grupo">
-                                    <label class="formulario__label">Nombre</label>
-                                    <input class="formulario__input" type="text" name="nombre" required>
-                                </div>
+                            <div class="formulario__grupo">
+                                <label class="formulario__label">Nombre</label>
+                                <input class="formulario__input" type="text" name="nombre" required>
+                            </div>
 
-                                <div class="formulario__grupo">
-                                    <label class="formulario__label">Padre</label>
-                                    <select class="formulario__input" name="idPadre">
-                                        <option value="">(sin padre)</option>
+                            <div class="formulario__grupo">
+                                <label class="formulario__label">Padre</label>
+                                <select class="formulario__input" name="idPadre">
+                                    <option value="">(sin padre)</option>
 
-                                        <option th:each="c : ${caracteristicas}"
-                                                th:value="${c.id}"
-                                                th:text="${c.nombre}">
-                                        </option>
-                                    </select>
+                                    <option th:each="c : ${caracteristicas}"
+                                            th:value="${c.id}"
+                                            th:text="${c.nombre}">
+                                    </option>
+                                </select>
 
-                                    <br><br>
-                                </div>
+                                <br><br>
+                            </div>
 
 
-                                <button class="formulario__boton" type="submit">Crear</button>
-                            </form>
+                            <button class="formulario__boton" type="submit">Crear</button>
+                        </form>
 
                     </div>
 
@@ -92,20 +92,7 @@
     </div>
 
 </main>
-
-<footer class="footer">
-
-    <div class="footer__info">
-        <strong>Bolsa de Empleo</strong><br>
-        Total Soft Inc.
-    </div>
-
-    <div class="footer__info">
-        Contacto: info@bolsaempleo.local<br>
-        Créditos: Equipo de desarrollo
-    </div>
-
-</footer>
+<footer th:replace="presentation/fragments/Footer :: footer"></footer>
 
 </body>
 </html>

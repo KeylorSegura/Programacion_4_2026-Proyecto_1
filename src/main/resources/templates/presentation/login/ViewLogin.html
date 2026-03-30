@@ -1,70 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Login</title>
-  <link rel="stylesheet" th:href="@{/css/styles.css}" type="text/css">
-  <link rel="stylesheet" th:href="@{/css/login/login.css}" type="text/css">
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/login/login.css}" type="text/css">
 </head>
 
 <body>
 <header th:replace="presentation/fragments/header :: header"></header>
 
 <main>
-  <div class="form-container">
-    <h2>Log in</h2>
+    <div class="form-container">
+        <h2>Log in</h2>
 
-    <div class="form w25">
-      <form th:action="@{/login}" method="post">
-        <div class="section">&#128697; Login</div>
+        <div class="form w25">
+            <form th:action="@{/login}" method="post">
+                <div class="section">&#128697; Login</div>
 
-        <div th:if="${param.error}" class="message message--error">
-          Usuario o contraseña incorrectos.
+                <div th:if="${param.error}" class="message message--error">
+                    Usuario o contraseña incorrectos.
+                </div>
+
+                <div th:if="${param.pendingApproval}" class="message message--warning">
+                    Tu cuenta todavía no ha sido aprobada por un administrador.
+                </div>
+
+                <div th:if="${param.logout}" class="message message--success">
+                    Has cerrado sesión correctamente.
+                </div>
+
+                <div>
+                    <div class="label">Id</div>
+                    <div class="field">
+                        <input type="text" id="username" name="username" required/>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="label">Clave</div>
+                    <div class="field">
+                        <input type="password" id="password" name="password" required/>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <input type="submit" name="login" value="Login" class="button">
+                </div>
+            </form>
         </div>
-
-        <div th:if="${param.pendingApproval}" class="message message--warning">
-          Tu cuenta todavía no ha sido aprobada por un administrador.
-        </div>
-
-        <div th:if="${param.logout}" class="message message--success">
-          Has cerrado sesión correctamente.
-        </div>
-
-        <div>
-          <div class="label">Id</div>
-          <div class="field">
-            <input type="text" id="username" name="username" required />
-          </div>
-        </div>
-
-        <div>
-          <div class="label">Clave</div>
-          <div class="field">
-            <input type="password" id="password" name="password" required />
-          </div>
-        </div>
-
-        <div class="section">
-          <input type="submit" name="login" value="Login" class="button">
-        </div>
-      </form>
     </div>
-  </div>
 
 </main>
-
-<footer>
-
-  <div>
-    <strong>Bolsa de Empleo</strong><br>
-    Total Soft Inc.
-  </div>
-
-  <div>
-    Contacto: info@bolsaempleo.local<br>
-    Créditos: Equipo de desarrollo
-  </div>
-</footer>
+<footer th:replace="presentation/fragments/Footer :: footer"></footer>
 </body>
 
 </html>

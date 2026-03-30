@@ -31,20 +31,24 @@
             <td class="mis-puestos__cell" th:text="${puesto.id}"></td>
             <td class="mis-puestos__cell" th:text="${puesto.descripcion}"></td>
             <td class="mis-puestos__cell" th:text="${puesto.salario}"></td>
-            <td class="mis-puestos__cell mis-puestos__cell--estado" th:text="${puesto.activo == 1} ? 'Activo' : 'Inactivo'"></td>
+            <td class="mis-puestos__cell mis-puestos__cell--estado"
+                th:text="${puesto.activo == 1} ? 'Activo' : 'Inactivo'"></td>
             <td class="mis-puestos__cell mis-puestos__cell--acciones">
-                <form class="mis-puestos__toggle-form" th:action="@{/presentation/empresa/puesto/toggle-activo/{id}(id=${puesto.id})}" method="post">
+                <form class="mis-puestos__toggle-form"
+                      th:action="@{/presentation/empresa/puesto/toggle-activo/{id}(id=${puesto.id})}" method="post">
                     <button class="mis-puestos__btn mis-puestos__btn--toggle" type="submit"
                             th:text="${puesto.activo == 1} ? 'Desactivar' : 'Activar'">
                     </button>
                 </form>
                 <button class="mis-puestos__btn mis-puestos__btn--candidatos">
-                    <a class="mis-puestos__btn-link" th:href="@{/presentation/empresa/candidatos/puesto(id=${puesto.id})}">Mostrar Candidatos</a>
+                    <a class="mis-puestos__btn-link"
+                       th:href="@{/presentation/empresa/candidatos/puesto(id=${puesto.id})}">Mostrar Candidatos</a>
                 </button>
             </td>
         </tr>
         </tbody>
     </table>
 </main>
+<footer th:replace="presentation/fragments/Footer :: footer"></footer>
 </body>
 </html>

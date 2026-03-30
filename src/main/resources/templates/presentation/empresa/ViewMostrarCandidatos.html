@@ -10,7 +10,8 @@
 <header th:replace="presentation/fragments/header :: header"></header>
 <main class="candidatos">
     <h1 class="candidatos__title">Candidatos para el puesto</h1>
-    <h2 class="candidatos__puesto">Puesto: <span class="candidatos__puesto-nombre" th:text="${puesto.descripcion}"></span></h2>
+    <h2 class="candidatos__puesto">Puesto: <span class="candidatos__puesto-nombre"
+                                                 th:text="${puesto.descripcion}"></span></h2>
 
     <table class="candidatos__table">
         <thead>
@@ -23,17 +24,23 @@
         </thead>
         <tbody>
         <tr class="candidatos__row" th:each="candidato : ${candidatos}">
-            <td class="candidatos__cell" th:text="${candidato['oferente'].nombre + ' ' + candidato['oferente'].primerApellido}"></td>
-            <td class="candidatos__cell" th:text="${candidato['requisitosCumplidos'] + '/' + candidato['totalRequisitos']}"></td>
-            <td class="candidatos__cell candidatos__cell--porcentaje" th:text="${candidato['porcentajeCoincidencia'] + '%'}"></td>
+            <td class="candidatos__cell"
+                th:text="${candidato['oferente'].nombre + ' ' + candidato['oferente'].primerApellido}"></td>
+            <td class="candidatos__cell"
+                th:text="${candidato['requisitosCumplidos'] + '/' + candidato['totalRequisitos']}"></td>
+            <td class="candidatos__cell candidatos__cell--porcentaje"
+                th:text="${candidato['porcentajeCoincidencia'] + '%'}"></td>
             <td class="candidatos__cell candidatos__cell--accion">
                 <button class="candidatos__btn" type="button">
-                    <a class="candidatos__btn-link" th:href="@{/presentation/empresa/candidatos/oferente(id=${candidato['oferente'].id})}">Ver detalles</a>
+                    <a class="candidatos__btn-link"
+                       th:href="@{/presentation/empresa/candidatos/oferente(id=${candidato['oferente'].id})}">Ver
+                        detalles</a>
                 </button>
             </td>
         </tr>
         </tbody>
     </table>
 </main>
+<footer th:replace="presentation/fragments/Footer :: footer"></footer>
 </body>
 </html>
