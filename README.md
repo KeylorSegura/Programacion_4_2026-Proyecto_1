@@ -34,6 +34,16 @@ La aplicacion estara disponible en `http://localhost:8080`.
 
 Las cuentas de Empresa y Oferente requieren aprobacion de un Administrador antes de poder iniciar sesion.
 
+### Administradores por defecto
+
+El script de base de datos incluye tres usuarios administradores con clave `1`:
+
+| Usuario | Clave |
+|---------|-------|
+| `1`     | `1`   |
+| `admin` | `1`   |
+| `root`  | `1`   |
+
 ## Tecnologias
 
 - Spring Boot 4.0.3
